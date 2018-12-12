@@ -42,7 +42,7 @@ static int	err_found(const int fd, char **line, char **overflow)
 		ft_memdel((void **)&overflow[fd]);
 	}
 	else
-		*line = ft_strnew(BUFF_SIZE + 1);
+		*line = NULL;
 	if (!(*line))
 		return (1);
 	return (0);
