@@ -10,9 +10,16 @@
 #                                                                              #
 # **************************************************************************** #
 
-NAME	=	libft.a
+NAME		=	libft.a
 
-SRC		= 	ft_memset.c		\
+HEADDIR		=	includes/
+HEADERS		=	-I $(HEADDIR)
+
+SRCDIR		=	srcs/
+SRC		:=	$(SRC)
+
+SUBDIR		=	ft_mem/
+SRCNAME		= 	ft_memset.c		\
 			ft_bzero.c		\
 			ft_memcpy.c		\
 			ft_memccpy.c	\
@@ -21,8 +28,30 @@ SRC		= 	ft_memset.c		\
 			ft_memcmp.c		\
 			ft_memalloc.c	\
 			ft_memdel.c
+SRC		+=	$(addprefix $(SRCDIR)$(SUBDIR), $(SRCNAME))
 
-SRC		+=	ft_strlen.c		\
+SUBDIR		=	conversion/
+SRCNAME		=	ft_itoa.c		\
+			ft_atoi.c			
+SRC		+=	$(addprefix $(SRCDIR)$(SUBDIR), $(SRCNAME))
+
+SUBDIR		=	ft_is/
+SRCNAME		=	ft_isalpha.c	\
+			ft_isdigit.c	\
+			ft_isalnum.c	\
+			ft_isascii.c	\
+			ft_isprint.c	\
+			ft_isspace.c	
+SRC		+=	$(addprefix $(SRCDIR)$(SUBDIR), $(SRCNAME))
+
+SUBDIR		=	utils/
+SRCNAME		=	ft_toupper.c	\
+			ft_tolower.c	\
+			ft_swap.c		
+SRC		+=	$(addprefix $(SRCDIR)$(SUBDIR), $(SRCNAME))
+
+SUBDIR		=	ft_str/
+SRCNAME		=	ft_strlen.c		\
 			ft_strdup.c 	\
 			ft_strcpy.c		\
 			ft_strncpy.c	\
@@ -34,21 +63,8 @@ SRC		+=	ft_strlen.c		\
 			ft_strstr.c		\
 			ft_strnstr.c	\
 			ft_strcmp.c		\
-			ft_strncmp.c
-
-SRC		+=	ft_itoa.c		\
-			ft_atoi.c			
-
-SRC		+=	ft_isalpha.c	\
-			ft_isdigit.c	\
-			ft_isalnum.c	\
-			ft_isascii.c	\
-			ft_isprint.c	\
-			ft_isspace.c	\
-			ft_toupper.c	\
-			ft_tolower.c
-
-SRC		+=	ft_strnew.c		\
+			ft_strncmp.c	\
+			ft_strnew.c		\
 			ft_strdel.c		\
 			ft_strclr.c		\
 			ft_striter.c	\
@@ -63,8 +79,10 @@ SRC		+=	ft_strnew.c		\
 			ft_strsplit.c	\
 			ft_strrev.c		\
 			ft_stradd.c
+SRC		+=	$(addprefix $(SRCDIR)$(SUBDIR), $(SRCNAME))
 
-SRC		+=	ft_putchar.c	\
+SUBDIR		=	ft_put/
+SRCNAME		=	ft_putchar.c	\
 			ft_putstr.c		\
 			ft_putendl.c	\
 			ft_putln.c		\
@@ -73,8 +91,10 @@ SRC		+=	ft_putchar.c	\
 			ft_putstr_fd.c	\
 			ft_putendl_fd.c	\
 			ft_putnbr_fd.c
+SRC		+=	$(addprefix $(SRCDIR)$(SUBDIR), $(SRCNAME))
 
-SRC		+=	ft_lstnew.c		\
+SUBDIR		=	ft_lst/
+SRCNAME		=	ft_lstnew.c		\
 			ft_lstdelone.c	\
 			ft_lstdel.c		\
 			ft_lstadd.c		\
@@ -82,32 +102,42 @@ SRC		+=	ft_lstnew.c		\
 			ft_lstcpy.c		\
 			ft_lstmap.c		\
 			ft_lstlen.c
+SRC		+=	$(addprefix $(SRCDIR)$(SUBDIR), $(SRCNAME))
 
-SRC		+= 	ft_power.c		\
+SUBDIR		=	maths/
+SRCNAME		= 	ft_power.c		\
 			ft_sqrt.c		\
-			ft_factorial.c	\
-			ft_swap.c		\
-			ft_print_tab.c	\
+			ft_factorial.c
+SRC		+=	$(addprefix $(SRCDIR)$(SUBDIR), $(SRCNAME))
+
+SUBDIR		=	tab2d/
+SRCNAME		=	ft_print_tab.c	\
 			ft_free_tab.c
+SRC		+=	$(addprefix $(SRCDIR)$(SUBDIR), $(SRCNAME))
 
-SRC		+=	get_next_line.c
+SUBDIR		=	gnl/
+SRCNAME		=	get_next_line.c
+SRC		+=	$(addprefix $(SRCDIR)$(SUBDIR), $(SRCNAME))
 
-OBJ		=	$(SRC:.c=.o)
+OBJDIR		=	objs/
+OBJ		=	$(SRC:$(SRCDIR)%.c=$(OBJDIR)%.o)
 	
-CC		=	gcc
-	
+CC		=	gcc	
 CFLAGS	=	-Wall -Wextra -Werror
 
 all		:	$(NAME)
 
-$(NAME)	:	$(OBJ)
+$(NAME)		:	$(OBJ)
 	ar rcs $@ $?
 
-%.o		:	%.c
-	$(CC) $(CFLAGS) -o $@ -c $^
+$(OBJDIR)%.o	:	$(SRCDIR)%.c
+	@if [ ! -d "$(dir $@)" ];then	\
+		mkdir -p $(dir $@);	\
+	fi
+	$(CC) $(CFLAGS) $(HEADERS) -o $@ -c $^
 
 clean	:
-	rm -rf $(OBJ)
+	rm -rf $(OBJDIR)
 
 fclean	:	clean
 	rm -rf $(NAME)
