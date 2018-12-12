@@ -30,11 +30,6 @@ SRCNAME		= 	ft_memset.c		\
 			ft_memdel.c
 SRC		+=	$(addprefix $(SRCDIR)$(SUBDIR), $(SRCNAME))
 
-SUBDIR		=	conversion/
-SRCNAME		=	ft_itoa.c		\
-			ft_atoi.c			
-SRC		+=	$(addprefix $(SRCDIR)$(SUBDIR), $(SRCNAME))
-
 SUBDIR		=	ft_is/
 SRCNAME		=	ft_isalpha.c	\
 			ft_isdigit.c	\
@@ -102,6 +97,17 @@ SRCNAME		=	ft_lstnew.c		\
 			ft_lstcpy.c		\
 			ft_lstmap.c		\
 			ft_lstlen.c
+SRC		+=	$(addprefix $(SRCDIR)$(SUBDIR), $(SRCNAME))
+
+SUBDIR		=	ft_pt/
+SRCNAME		=	ft_ptnew.c	\
+			ft_ptcpy.c	\
+			ft_ptset.c
+SRC		+=	$(addprefix $(SRCDIR)$(SUBDIR), $(SRCNAME))
+
+SUBDIR		=	conversion/
+SRCNAME		=	ft_itoa.c		\
+			ft_atoi.c			
 SRC		+=	$(addprefix $(SRCDIR)$(SUBDIR), $(SRCNAME))
 
 SUBDIR		=	maths/

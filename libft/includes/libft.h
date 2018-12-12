@@ -18,6 +18,7 @@
 # include <string.h>
 # include "list.h"
 # include "get_next_line.h"
+# include "point.h"
 
 void				*ft_memset(void *b, int c, size_t len);
 void				ft_bzero(void *s, size_t n);
