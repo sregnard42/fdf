@@ -6,7 +6,7 @@
 /*   By: sregnard <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/24 09:14:37 by sregnard          #+#    #+#             */
-/*   Updated: 2018/12/09 16:25:10 by jdugoudr         ###   ########.fr       */
+/*   Updated: 2018/12/13 08:28:24 by sregnard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 
 # include "libft.h"
 
-# define DEBUG				0
+# define DEBUG				1
 # define DEBUG_ON			"DEBUG : "
 # define MSG_ERR			"error"
 

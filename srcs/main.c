@@ -7,7 +7,7 @@ static char	*read_file(int fd, char *content)
 
 	content = NULL;
 	line = NULL;
-	while ((ret = get_next_line(fd, &line)))
+	while ((ret = get_next_line(fd, &line) == 1))
 	{
 		if (!(content = ft_stradd(content, line)))
 		{

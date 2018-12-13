@@ -6,7 +6,7 @@
 /*   By: sregnard <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/20 08:12:48 by sregnard          #+#    #+#             */
-/*   Updated: 2018/11/29 10:08:20 by sregnard         ###   ########.fr       */
+/*   Updated: 2018/12/13 08:39:53 by sregnard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ static int	eol_found(const int fd, char *line, char **overflow)
 	int		i;
 
 	i = 0;
-	while (line[i])
+	while (line && line[i])
 	{
 		if (line[i] == EOL)
 		{
@@ -40,11 +40,11 @@ static int	err_found(const int fd, char **line, char **overflow)
 		*line = ft_strdup(overflow[fd]);
 		ft_strclr(overflow[fd]);
 		ft_memdel((void **)&overflow[fd]);
+		if (!(*line))
+			return (1);
 	}
 	else
 		*line = NULL;
-	if (!(*line))
-		return (1);
 	return (0);
 }
 

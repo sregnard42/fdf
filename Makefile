@@ -6,7 +6,7 @@
 #    By: sregnard <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/11/07 14:51:18 by sregnard          #+#    #+#              #
-#    Updated: 2018/12/09 15:27:20 by jdugoudr         ###   ########.fr        #
+#    Updated: 2018/12/13 09:47:57 by sregnard         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,6 +14,9 @@ NAME			=	fdf
 
 LIBFTDIR		=	libft/
 LIBFT			=	$(LIBFTDIR)libft.a
+
+MINILIBXDIR		=	minilibx/
+MINILIBX		=	$(MINILIBXDIR)libmlx.a
 
 HEADDIR			=	includes/
 HEADERS			=	-I $(HEADDIR)
@@ -30,15 +33,20 @@ CC				=	gcc
 CFLAGS			=	-Wall -Wextra -Werror
 XFLAGS			=
 
-all				: $(NAME)
+all				:	$(NAME)
 
-$(NAME)		:	$(LIBFT) $(OBJDIR) $(OBJ)
-	$(CC) $(CFLAGS) $(XFLAGS) $(HEADERS) -o $@ $(OBJ) -L $(LIBFTDIR) -lft
+$(NAME)			:	$(LIBFT) $(MINILIBX) $(OBJDIR) $(OBJ)
+	$(CC) $(CFLAGS) $(XFLAGS) $(HEADERS) -o $@ $(OBJ) \
+		-L $(LIBFTDIR) -lft \
+		-L $(MINILIBXDIR) -lmlx
 
 $(LIBFT)		:
-	$(MAKE) -C libft/
+	$(MAKE) -C $(LIBFTDIR)
 
-$(OBJDIR)	:
+$(MINILIBX)		:
+	$(MAKE)	-C $(MINILIBXDIR)
+
+$(OBJDIR)		:
 	mkdir -p $(OBJDIR)
 
 $(OBJDIR)%.o	:	$(SRCDIR)%.c
@@ -46,7 +54,8 @@ $(OBJDIR)%.o	:	$(SRCDIR)%.c
 
 clean			:	
 	rm -rf $(OBJDIR)
-	$(MAKE) clean -C libft/
+	$(MAKE) clean -C $(LIBFTDIR)
+	$(MAKE) clean -C $(MINILIBXDIR)
 
 fclean			:	clean
 	rm -rf $(NAME)
