@@ -6,7 +6,7 @@
 /*   By: sregnard <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/08 14:49:24 by sregnard          #+#    #+#             */
-/*   Updated: 2018/12/03 08:35:05 by sregnard         ###   ########.fr       */
+/*   Updated: 2018/12/14 12:49:31 by sregnard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@
 # include <string.h>
 # include "list.h"
 # include "get_next_line.h"
+# include "read_file.h"
 # include "point.h"
 
 void				*ft_memset(void *b, int c, size_t len);
@@ -29,6 +30,15 @@ void				*ft_memchr(const void *s, int c, size_t n);
 int					ft_memcmp(const void *s1, const void *s2, size_t n);
 void				*ft_memalloc(size_t size);
 void				ft_memdel(void **ap);
+
+int					ft_isalpha(int c);
+int					ft_isdigit(int c);
+int					ft_isalnum(int c);
+int					ft_isascii(int c);
+int					ft_isprint(int c);
+int					ft_isspace(int c);
+int					ft_isnumber(char *s);
+int					ft_ishexa(char *s);
 
 size_t				ft_strlen(const char *s);
 char				*ft_strdup(const char *s1);
@@ -43,18 +53,6 @@ char				*ft_strstr(const char *haystack, const char *needle);
 char				*ft_strnstr(const char *hay, const char *ndl, size_t len);
 int					ft_strcmp(const char *s1, const char *s2);
 int					ft_strncmp(const char *s1, const char *s2, size_t n);
-
-char				*ft_itoa(int n);
-int					ft_atoi(const char *str);
-int					ft_isalpha(int c);
-int					ft_isdigit(int c);
-int					ft_isalnum(int c);
-int					ft_isascii(int c);
-int					ft_isprint(int c);
-int					ft_isspace(int c);
-int					ft_toupper(int c);
-int					ft_tolower(int c);
-
 char				*ft_strnew(size_t size);
 void				ft_strdel(char **as);
 void				ft_strclr(char *s);
@@ -76,18 +74,25 @@ void				ft_putstr(char const *s);
 void				ft_putendl(char const *s);
 void				ft_putnbr(int n);
 void				ft_putln(void);
-void				ft_puttab(void);
-
 void				ft_putchar_fd(char c, int fd);
 void				ft_putstr_fd(char const *s, int fd);
 void				ft_putendl_fd(char const *s, int fd);
 void				ft_putnbr_fd(int n, int fd);
 
+int					ft_toupper(int c);
+int					ft_tolower(int c);
+void				ft_swap(int *a, int *b);
+
+char				*ft_itoa(int n);
+int					ft_atoi(const char *str);
+
 int					ft_power(int n, unsigned int pow);
 int					ft_sqrt(unsigned int n);
 int					ft_factorial(unsigned int n);
-void				ft_swap(int *a, int *b);
 
-void				ft_print_tab(char **content);
-void				ft_free_tab(char ***content);
+void				ft_print_tab(char **tab);
+void				ft_free_tab(char ***ptr_tab);
+int					ft_nb_str_tab(char **tab);
+int					ft_max_strlen_tab(char **tab);
+int					*ft_atoi_tab(char **tab, int size);
 #endif

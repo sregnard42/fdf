@@ -1,27 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   errors.h                                           :+:      :+:    :+:   */
+/*   read_file.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: sregnard <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/11/24 09:14:37 by sregnard          #+#    #+#             */
-/*   Updated: 2018/12/14 09:27:50 by sregnard         ###   ########.fr       */
+/*   Created: 2018/12/13 11:26:27 by sregnard          #+#    #+#             */
+/*   Updated: 2018/12/13 11:29:44 by sregnard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef ERRORS_H
-# define ERRORS_H
+#ifndef READ_FILE_H
+# define READ_FILE_H
 
 # include "libft.h"
+# include <fcntl.h>
 
-# define DEBUG				1
-# define DEBUG_ON			"DEBUG : "
-# define MSG_ERR			"error"
-
-# define ERR_USAGE			"usage: ./fdf file"
-# define ERR_FILE			"FIle error."
-
-void	trigger_error(char *err_code);
+char	**read_file(char *file);
 
 #endif

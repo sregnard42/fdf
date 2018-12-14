@@ -1,27 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   errors.h                                           :+:      :+:    :+:   */
+/*   ft_atoi_tab.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: sregnard <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/11/24 09:14:37 by sregnard          #+#    #+#             */
-/*   Updated: 2018/12/14 09:27:50 by sregnard         ###   ########.fr       */
+/*   Created: 2018/12/13 11:37:34 by sregnard          #+#    #+#             */
+/*   Updated: 2018/12/14 12:47:42 by sregnard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef ERRORS_H
-# define ERRORS_H
+#include "libft.h"
 
-# include "libft.h"
+int			*ft_atoi_tab(char **src, int size)
+{
+	int	*tab;
+	int	i;
 
-# define DEBUG				1
-# define DEBUG_ON			"DEBUG : "
-# define MSG_ERR			"error"
-
-# define ERR_USAGE			"usage: ./fdf file"
-# define ERR_FILE			"FIle error."
-
-void	trigger_error(char *err_code);
-
-#endif
+	if (!src || !(tab = (int *)malloc(sizeof(int) * size)))
+		return (NULL);
+	i = 0;
+	while (i < size)
+	{
+		tab[i] = ft_atoi(src[i]);
+		i++;
+	}
+	return (tab);
+}

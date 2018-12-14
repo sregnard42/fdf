@@ -6,7 +6,7 @@
 #    By: sregnard <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/11/07 14:51:18 by sregnard          #+#    #+#              #
-#    Updated: 2018/12/13 09:47:57 by sregnard         ###   ########.fr        #
+#    Updated: 2018/12/14 14:26:11 by sregnard         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -21,22 +21,29 @@ MINILIBX		=	$(MINILIBXDIR)libmlx.a
 HEADDIR			=	includes/
 HEADERS			=	-I $(HEADDIR)
 HEADERS			+=	-I $(LIBFTDIR)$(HEADDIR)
+HEADERS			+=	-I $(MINILIBXDIR)
 
 SRCDIR			=	srcs/
-SRC				= 	$(SRCDIR)main.c
-SRC				+= 	$(SRCDIR)errors.c
+SRCNAME			= 	main.c \
+					errors.c \
+					params.c
+SRC				=	$(addprefix $(SRCDIR), $(SRCNAME))
 
 OBJDIR			=	objs/
 OBJ				=	$(SRC:$(SRCDIR)%.c=$(OBJDIR)%.o)
 	
 CC				=	gcc	
 CFLAGS			=	-Wall -Wextra -Werror
-XFLAGS			=
+XFLAGS			=	-g3
+LINK			=	-lmlx -framework OpenGL -framework AppKit
 
 all				:	$(NAME)
 
 $(NAME)			:	$(LIBFT) $(MINILIBX) $(OBJDIR) $(OBJ)
-	$(CC) $(CFLAGS) $(XFLAGS) $(HEADERS) -o $@ $(OBJ) \
+	$(CC) $(CFLAGS) $(XFLAGS) \
+		$(LINK) \
+		$(HEADERS) \
+		-o $@ $(OBJ) \
 		-L $(LIBFTDIR) -lft \
 		-L $(MINILIBXDIR) -lmlx
 

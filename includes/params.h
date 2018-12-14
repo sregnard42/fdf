@@ -1,27 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   errors.h                                           :+:      :+:    :+:   */
+/*   params.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: sregnard <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/11/24 09:14:37 by sregnard          #+#    #+#             */
-/*   Updated: 2018/12/14 09:27:50 by sregnard         ###   ########.fr       */
+/*   Created: 2018/12/14 13:37:06 by sregnard          #+#    #+#             */
+/*   Updated: 2018/12/14 14:23:20 by sregnard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef ERRORS_H
-# define ERRORS_H
+#ifndef	PARAMS_H
+# define PARAMS_H
 
 # include "libft.h"
+# include "mlx.h"
 
-# define DEBUG				1
-# define DEBUG_ON			"DEBUG : "
-# define MSG_ERR			"error"
+typedef struct	s_params
+{
+	void		*mlx;
+	void		*win;
+	char		**map;
+	t_point		*win_size;
+	t_point		*map_size;
+}				t_params;
 
-# define ERR_USAGE			"usage: ./fdf file"
-# define ERR_FILE			"FIle error."
-
-void	trigger_error(char *err_code);
+t_params	*params_new(char **map);
+void		params_free(t_params **params);
 
 #endif
