@@ -13,5 +13,6 @@ typedef struct	s_point
 t_point		*ft_ptnew(int x, int y, int z);
 void		ft_ptcpy(t_point *dst, t_point *src);
 void		ft_ptset(t_point *pt, int x, int y, int z);
+void		ft_ptfree(void **pt, size_t size);
 
 #endif

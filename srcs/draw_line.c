@@ -6,7 +6,7 @@
 /*   By: sregnard <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/14 08:36:46 by sregnard          #+#    #+#             */
-/*   Updated: 2018/12/14 09:24:43 by sregnard         ###   ########.fr       */
+/*   Updated: 2018/12/17 08:05:30 by sregnard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,6 @@ void	draw_line(t_output *output, t_point *p1, t_point *p2)
 
 	d.y = p2->y - p1->y;
 	d.x = p2->x - p1->x;
-
 	ft_ptcpy(&p, p1);
 	while (p.y <= p2->y && p.x <= p2->x)
 	{

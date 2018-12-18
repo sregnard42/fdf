@@ -1,30 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_lstnew.c                                        :+:      :+:    :+:   */
+/*   isometric.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: sregnard <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/11/12 12:58:29 by sregnard          #+#    #+#             */
-/*   Updated: 2018/12/17 14:01:48 by sregnard         ###   ########.fr       */
+/*   Created: 2018/12/17 13:56:57 by sregnard          #+#    #+#             */
+/*   Updated: 2018/12/18 09:08:19 by sregnard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#ifndef ISOMETRIC_H
+# define ISOMETRIC_H
 
-t_list	*ft_lstnew(void *content, size_t content_size)
-{
-	t_list	*elem;
+# include "libft.h"
 
-	if ((elem = (t_list *)malloc(sizeof(t_list))) == NULL)
-		return (NULL);
-	ft_bzero(elem, sizeof(t_list));
-	if (content)
-	{
-		elem->content = content;
-		elem->content_size = content_size;
-	}
-	elem->prev = NULL;
-	elem->next = NULL;
-	return (elem);
-}
+t_map	*isometric_mapping(char **map);
+
+#endif

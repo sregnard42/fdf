@@ -1,30 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_lstnew.c                                        :+:      :+:    :+:   */
+/*   ft_mapfree.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: sregnard <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/11/12 12:58:29 by sregnard          #+#    #+#             */
-/*   Updated: 2018/12/17 14:01:48 by sregnard         ###   ########.fr       */
+/*   Created: 2018/12/18 08:45:09 by sregnard          #+#    #+#             */
+/*   Updated: 2018/12/18 08:46:13 by sregnard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-t_list	*ft_lstnew(void *content, size_t content_size)
+void	ft_map_free(t_map **map)
 {
-	t_list	*elem;
-
-	if ((elem = (t_list *)malloc(sizeof(t_list))) == NULL)
-		return (NULL);
-	ft_bzero(elem, sizeof(t_list));
-	if (content)
-	{
-		elem->content = content;
-		elem->content_size = content_size;
-	}
-	elem->prev = NULL;
-	elem->next = NULL;
-	return (elem);
+	ft_free_tab(&((*map)->map));
+	ft_memdel((void **)map);
 }

@@ -6,7 +6,7 @@
 #    By: sregnard <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/11/07 14:51:18 by sregnard          #+#    #+#              #
-#    Updated: 2018/12/14 12:48:39 by sregnard         ###   ########.fr        #
+#    Updated: 2018/12/18 09:07:51 by sregnard         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -98,7 +98,8 @@ SRC			+=	$(addprefix $(SRCDIR)$(SUBDIR), $(SRCNAME))
 SUBDIR		=	ft_pt/
 SRCNAME		=	ft_ptnew.c \
 				ft_ptcpy.c \
-				ft_ptset.c
+				ft_ptset.c \
+				ft_ptfree.c
 SRC			+=	$(addprefix $(SRCDIR)$(SUBDIR), $(SRCNAME))
 
 SUBDIR		=	utils/
@@ -129,6 +130,11 @@ SRC			+=	$(addprefix $(SRCDIR)$(SUBDIR), $(SRCNAME))
 SUBDIR		=	file/
 SRCNAME		=	get_next_line.c \
 				read_file.c
+SRC			+=	$(addprefix $(SRCDIR)$(SUBDIR), $(SRCNAME))
+
+SUBDIR		=	ft_map/
+SRCNAME		=	ft_mapnew.c \
+				ft_mapfree.c
 SRC			+=	$(addprefix $(SRCDIR)$(SUBDIR), $(SRCNAME))
 
 OBJDIR		=	objs/

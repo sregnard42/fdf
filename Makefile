@@ -6,7 +6,7 @@
 #    By: sregnard <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/11/07 14:51:18 by sregnard          #+#    #+#              #
-#    Updated: 2018/12/14 14:26:11 by sregnard         ###   ########.fr        #
+#    Updated: 2018/12/17 13:56:43 by sregnard         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -26,7 +26,9 @@ HEADERS			+=	-I $(MINILIBXDIR)
 SRCDIR			=	srcs/
 SRCNAME			= 	main.c \
 					errors.c \
-					params.c
+					params.c \
+					fdf_xpm.c \
+					isometric.c
 SRC				=	$(addprefix $(SRCDIR), $(SRCNAME))
 
 OBJDIR			=	objs/
