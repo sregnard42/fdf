@@ -165,6 +165,7 @@ void	*mlx_int_parse_xpm(mlx_ptr_t *xvar,void *info,int info_size,char *(*f)())
   free(tab);
   tab = 0;
 
+
   method = 0;
   if (cpp<=2)
     {

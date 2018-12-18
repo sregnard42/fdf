@@ -6,7 +6,7 @@
 /*   By: sregnard <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/17 13:16:40 by sregnard          #+#    #+#             */
-/*   Updated: 2018/12/18 09:43:02 by sregnard         ###   ########.fr       */
+/*   Updated: 2018/12/18 13:20:17 by sregnard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,11 +54,15 @@ static void		find_edges(t_list *lst, t_point *min, t_point *max)
 {
 	t_point *pt;
 
-	ft_ptset(min, 0, 0, 0);
+	ft_ptset(min, 0, 0, -1);
 	ft_ptset(max, 0, 0, 0);
 	while (lst)
 	{
 		pt = (t_point *)lst->content;
+		if (min->z == -1)
+		{
+			ft_ptset(min, pt->x, pt->y, 0);
+		}
 		if (min->x > pt->x)
 			min->x = pt->x;
 		if (min->y > pt->y)
@@ -82,16 +86,12 @@ static int		normalize(t_list *lst, t_point *max)
 	while (lst)
 	{
 		pt = (t_point *)lst->content;
-		pt->x -= min->x;
-		pt->y -= min->y;
+		pt->x = pt->x - min->x;
+		pt->y = pt->y - min->y;
 		lst = lst->next;
 	}
-	max->x -= min->x;
-	max->y -= min->y;
-	ft_putnbr(max->y);
-	ft_putstr(", ");
-	ft_putnbr(max->x);
-	ft_putln();
+	max->x = max->x - min->x;
+	max->y = max->y - min->y;
 	return (1);
 }
 
@@ -99,19 +99,12 @@ static int		fill_map(t_map *map, t_list *lst)
 {
 	t_point *pt;
 
-	ft_putendl("Fill map");
 	while (lst)
 	{
 		pt = (t_point *)lst->content;
 		if (pt->y < 0 || pt->y >= map->height
 				|| pt->x < 0 || pt->x >= map->width)
-		{
-			ft_putnbr(pt->y);
-			ft_putstr(", ");
-			ft_putnbr(pt->x);
-			ft_putln();
 			return (0);
-		}
 		(map->map)[pt->y][pt->x] = '*';
 		lst = lst->next;
 	}
