@@ -6,7 +6,7 @@
 #    By: sregnard <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/11/07 14:51:18 by sregnard          #+#    #+#              #
-#    Updated: 2018/12/17 13:56:43 by sregnard         ###   ########.fr        #
+#    Updated: 2018/12/19 14:06:00 by sregnard         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -28,7 +28,9 @@ SRCNAME			= 	main.c \
 					errors.c \
 					params.c \
 					fdf_xpm.c \
-					isometric.c
+					projection.c \
+					projection_utils.c \
+					projection_maths.c
 SRC				=	$(addprefix $(SRCDIR), $(SRCNAME))
 
 OBJDIR			=	objs/

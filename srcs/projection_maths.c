@@ -1,20 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   isometric.h                                        :+:      :+:    :+:   */
+/*   projection.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: sregnard <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/12/17 13:56:57 by sregnard          #+#    #+#             */
-/*   Updated: 2018/12/18 09:08:19 by sregnard         ###   ########.fr       */
+/*   Created: 2018/12/19 13:47:15 by sregnard          #+#    #+#             */
+/*   Updated: 2018/12/19 14:06:14 by sregnard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef ISOMETRIC_H
-# define ISOMETRIC_H
+#include "projection.h"
 
-# include "libft.h"
+t_point	*proj_isometric(t_point *p)
+{
+	t_point *pt;
 
-t_map	*isometric_mapping(char **map);
-
-#endif
+	if (!(pt = ft_ptnew(0, 0, 0)))
+		return (NULL);
+	pt->x = 2 * (p->x - p->y);
+	pt->y = p->x + p->y - 2 * p->z;
+	return (pt);
+}

@@ -6,7 +6,7 @@
 /*   By: sregnard <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/18 09:25:13 by sregnard          #+#    #+#             */
-/*   Updated: 2018/12/18 13:14:56 by sregnard         ###   ########.fr       */
+/*   Updated: 2018/12/19 14:16:25 by sregnard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,6 +53,5 @@ void			params_free(t_params **ptr_params)
 	params = *ptr_params;
 	mlx_destroy_window(params->mlx, params->win);
 	ft_memdel((void **)&(params->mlx));
-//	ft_mapfree(&(params->xpm));
 	ft_memdel((void **)ptr_params);
 }

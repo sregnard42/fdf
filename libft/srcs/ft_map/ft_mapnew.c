@@ -6,7 +6,7 @@
 /*   By: sregnard <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/18 08:33:59 by sregnard          #+#    #+#             */
-/*   Updated: 2018/12/18 09:36:10 by sregnard         ###   ########.fr       */
+/*   Updated: 2018/12/19 14:20:44 by sregnard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,11 +16,11 @@ t_map			*ft_mapnew(int width, int height, char c)
 {
 	t_map	*map;
 	t_point pos;
-	
+
 	if (!(map = (t_map *)malloc(sizeof(t_map))))
 		return (NULL);
 	if (!(map->map = (char **)malloc(sizeof(char *) * (height + 1))))
-		return(NULL);
+		return (NULL);
 	map->map[height] = NULL;
 	ft_ptset(&pos, 0, 0, 0);
 	while (pos.y < height)
@@ -34,9 +34,8 @@ t_map			*ft_mapnew(int width, int height, char c)
 			pos.x += 1;
 		}
 		ft_ptset(&pos, 0, pos.y + 1, 0);
-	}	
+	}
 	map->height = height;
 	map->width = width;
 	return (map);
 }
-

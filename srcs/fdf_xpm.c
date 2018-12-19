@@ -6,7 +6,7 @@
 /*   By: sregnard <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/17 08:11:11 by sregnard          #+#    #+#             */
-/*   Updated: 2018/12/18 13:58:43 by sregnard         ###   ########.fr       */
+/*   Updated: 2018/12/19 14:17:11 by sregnard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ static void	header_and_footer(t_map *xpm, int size)
 	xpm->map[size] = 0;
 }
 
-static void		fdf_to_xpm(t_map *xpm, char **fdf)
+static void	fdf_to_xpm(t_map *xpm, char **fdf)
 {
 	int		size;
 	int		i;

@@ -6,7 +6,7 @@
 /*   By: sregnard <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/13 11:27:59 by sregnard          #+#    #+#             */
-/*   Updated: 2018/12/13 11:30:16 by sregnard         ###   ########.fr       */
+/*   Updated: 2018/12/19 14:19:39 by sregnard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 static char		*get_content(int fd, char *content)
 {
 	char	*line;
-	int	ret;
+	int		ret;
 
 	content = NULL;
 	line = NULL;
@@ -44,7 +44,7 @@ char			**read_file(char *file)
 {
 	char	**content_tab;
 	char	*content;
-	int	fd;
+	int		fd;
 
 	if ((fd = open(file, O_RDONLY)) == -1)
 		return (NULL);

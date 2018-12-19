@@ -6,7 +6,7 @@
 /*   By: sregnard <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/17 08:06:57 by sregnard          #+#    #+#             */
-/*   Updated: 2018/12/18 08:16:02 by sregnard         ###   ########.fr       */
+/*   Updated: 2018/12/19 13:52:57 by sregnard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@
 # include "errors.h"
 # include "params.h"
 # include "fdf_xpm.h"
-# include "isometric.h"
+# include "projection.h"
 
 # define KEY_ESCAPE 53
 

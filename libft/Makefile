@@ -6,7 +6,7 @@
 #    By: sregnard <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/11/07 14:51:18 by sregnard          #+#    #+#              #
-#    Updated: 2018/12/18 09:07:51 by sregnard         ###   ########.fr        #
+#    Updated: 2018/12/19 14:21:47 by sregnard         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -37,8 +37,7 @@ SRCNAME		=	ft_isalpha.c \
 				ft_isascii.c \
 				ft_isprint.c \
 				ft_isspace.c \
-				ft_isnumber.c \
-				ft_ishexa.c
+				ft_isnumber.c
 SRC			+=	$(addprefix $(SRCDIR)$(SUBDIR), $(SRCNAME))
 
 SUBDIR		=	ft_str/
