@@ -6,7 +6,7 @@
 /*   By: sregnard <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/18 09:25:13 by sregnard          #+#    #+#             */
-/*   Updated: 2018/12/19 14:16:25 by sregnard         ###   ########.fr       */
+/*   Updated: 2018/12/19 14:34:45 by sregnard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,8 +18,8 @@ static void		set_win_size(t_params *params)
 
 	ratio = (params->xpm)->width / (params->xpm)->height;
 	params->win_size = (t_point *)malloc(sizeof(t_point));
-	params->win_size->x = (params->xpm)->width * 100;
-	params->win_size->y = (params->xpm)->height * 100;
+	params->win_size->x = (params->xpm)->width * 1;
+	params->win_size->y = (params->xpm)->height * 1;
 	if (params->win_size->x > 1280 || params->win_size->y > 720)
 	{
 		if (ratio > 1)

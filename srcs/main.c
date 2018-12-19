@@ -6,7 +6,7 @@
 /*   By: sregnard <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/13 11:05:50 by sregnard          #+#    #+#             */
-/*   Updated: 2018/12/19 14:16:46 by sregnard         ###   ########.fr       */
+/*   Updated: 2018/12/19 15:15:06 by sregnard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,7 @@ int				main(int ac, char **av)
 	t_params	*params;
 	void		*img;
 	char		**file_content;
+	t_point		p;
 
 	if (ac != 2)
 		trigger_error(ERR_USAGE);
@@ -43,6 +44,8 @@ int				main(int ac, char **av)
 	img = mlx_xpm_to_image(params->mlx, params->xpm->map,
 			&(params->xpm->width), &(params->xpm->height));
 	mlx_put_image_to_window(params->mlx, params->win, img, 0, 0);
+	ft_ptset(&p, 0, 10, 0);
+	draw_line(params, *(params->win_size), p);
 	mlx_loop(params->mlx);
 	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: sregnard <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/17 08:11:11 by sregnard          #+#    #+#             */
-/*   Updated: 2018/12/19 14:17:11 by sregnard         ###   ########.fr       */
+/*   Updated: 2018/12/19 14:37:24 by sregnard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ static void	fdf_to_xpm(t_map *xpm, char **fdf)
 	int		size;
 	int		i;
 
-	xpm->width = ft_max_strlen_tab(fdf);
+	xpm->width = ft_strlen(*fdf);
 	xpm->height = ft_nb_str_tab(fdf);
 	size = xpm->height + ft_atoi(XPM_COLORS) + 1;
 	if (!(xpm->map = (char **)malloc(sizeof(char *) * (size + 1))))

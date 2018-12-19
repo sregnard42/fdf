@@ -6,46 +6,37 @@
 /*   By: sregnard <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/14 08:36:46 by sregnard          #+#    #+#             */
-/*   Updated: 2018/12/17 08:05:30 by sregnard         ###   ########.fr       */
+/*   Updated: 2018/12/19 15:15:53 by sregnard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "draw.h"
 
-void	draw_line(t_output *output, t_point *p1, t_point *p2)
+void	draw_line(t_params *params, t_point p1, t_point p2)
 {
-	t_point p;
-	t_point d;
+	t_point	d;
+	t_point	s;
+	int		err;
+	int		e2;
 
-	d.y = p2->y - p1->y;
-	d.x = p2->x - p1->x;
-	ft_ptcpy(&p, p1);
-	while (p.y <= p2->y && p.x <= p2->x)
+	d.x = (p1.x < p2.x) ? p2.x - p1.x : p1.x - p2.x;
+	s.x = (p1.x < p2.x) ? 1 : -1;
+	d.y = (p1.y < p2.y) ? p2.y - p1.y : p1.y - p2.y;
+	s.y = (p1.y < p2.y) ? 1 : -1;
+	err = (d.x > d.y) ? d.x / 2 : d.y / 2;
+	while (p1.y != p2.y && p1.x != p2.x)
 	{
-		mlx_pixel_put(output->mlx, output->win, p.y, p.x, 0xFFFFFF);
-	}
-}
-
-void	draw_v_line(t_output *output, t_point *p1, t_point *p2)
-{
-	t_point p;
-
-	ft_ptcpy(&p, p1);
-	while (p.y != p2->y)
-	{
-		mlx_pixel_put(output->mlx, output->win, p.y, p.x, 0xFFFFFF);
-		(p.y < p2->y) ? (p.y += 1) : (p.y -= 1);
-	}
-}
-
-void	draw_h_line(t_output *output, t_point *p1, t_point *p2)
-{
-	t_point p;
-
-	ft_ptcpy(&p, p1);
-	while (p.x != p2->x)
-	{
-		mlx_pixel_put(output->mlx, output->win, p.y, p.x, 0xFFFFFF);
-		(p.y < p2->y) ? (p.y += 1) : (p.y -= 1);
+		mlx_pixel_put(params->mlx, params->win, p1.x, p1.y, 0xFFFFFF);
+		e2 = err;
+		if (e2 > -d.x)
+		{
+			err -= d.y;
+			p1.x += s.x;
+		}
+		if (e2 < d.y)
+		{
+			err += d.x;
+			p1.y += s.y;
+		}
 	}
 }
