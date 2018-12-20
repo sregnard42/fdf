@@ -1,47 +1,37 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   isometric.c                                        :+:      :+:    :+:   */
+/*   projection.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: sregnard <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/12/17 13:16:40 by sregnard          #+#    #+#             */
-/*   Updated: 2018/12/19 14:15:51 by sregnard         ###   ########.fr       */
+/*   Created: 2018/12/20 13:36:45 by sregnard          #+#    #+#             */
+/*   Updated: 2018/12/20 14:43:01 by sregnard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 #include "projection.h"
+#include "draw.h"
 
 static t_point	*get_point(t_point *pos)
 {
 	return (proj_isometric(pos));
 }
 
-static int		process_line(t_list **lst, char **map, t_point pos)
+static int		process_line(t_point ***pts, char **line, t_point pos)
 {
-	t_list	*elem;
-	int		i;
+	t_point	*pt;
 
-	i = 0;
-	while (map && map[pos.y][pos.x + i])
+	while (line[pos.x])
 	{
-		pos.z = ft_atoi(&map[pos.y][pos.x + i]);
-		if (!(elem = ft_lstnew(get_point(&pos), sizeof(t_point))))
-		{
-			ft_lstdel(lst, &ft_ptfree);
+		pos.z = ft_atoi(line[pos.x]);
+		if (!(pt = get_point(&pos)))
 			return (0);
-		}
-		if (!(*lst))
-			*lst = elem;
-		else
-			ft_lstadd(lst, elem);
+		pts[pos.y][pos.x] = pt;
 		pos.x += 1;
-		while (map[pos.y][pos.x + i] && map[pos.y][pos.x + i] != ' ')
-			i += 1;
-		while (map[pos.y][pos.x + i] && map[pos.y][pos.x + i] == ' ')
-			i += 1;
 	}
+	pts[pos.y][pos.x] = NULL;
 	return (1);
 }
 
@@ -49,48 +39,62 @@ static int		process_line(t_list **lst, char **map, t_point pos)
 **	Create a list of points representing the projection
 */
 
-static t_list	*lst_points(char **map)
+static t_point	***get_points(char **map, t_point *size)
 {
-	t_list	*lst;
+	t_point	***pts;
 	t_point pos;
+	char	**line;
 
-	lst = NULL;
+	size->y = ft_nb_str_tab(map);
+	pts = (t_point ***)malloc(sizeof(t_point **) * (size->y + 1));
+	pts[size->y] = NULL;
 	ft_ptset(&pos, 0, 0, 0);
-	while (map && map[pos.y])
+	while (pos.y < size->y)
 	{
-		process_line(&lst, map, pos);
+		line = ft_strsplit(map[pos.y], ' ');
+		size->x = ft_nb_str_tab(line);
+		pts[pos.y] = (t_point **)malloc(sizeof(t_point *) * (size->x + 1));
+		pts[pos.y][size->x] = NULL;
+		process_line(pts, line, pos);
 		pos.y += 1;
 	}
-	return (lst);
+	return (pts);
 }
 
-static int		fill_map(t_map *map, t_list *lst)
+static int		place_points(t_map *map, t_point ***pts, t_point size_tab)
 {
 	t_point *pt;
+	t_point	pos;
 
-	while (lst)
+	ft_ptset(&pos, 0, 0, 0);
+	while (pts[pos.y])
 	{
-		pt = (t_point *)lst->content;
-		if (pt->y < 0 || pt->y >= map->height
-				|| pt->x < 0 || pt->x >= map->width)
-			return (0);
-		(map->map)[pt->y][pt->x] = '*';
-		lst = lst->next;
+		while (pts[pos.y][pos.x])
+		{
+			pt = pts[pos.y][pos.x];
+			if (pt->y < 0 || pt->y >= map->height
+					|| pt->x < 0 || pt->x >= map->width)
+				return (0);
+			(map->map)[pt->y][pt->x] = '*';
+			draw_all_lines(map, pts, size_tab, pos);
+			pos.x += 1;
+		}
+		ft_ptset(&pos, 0, pos.y + 1, 0);
 	}
 	return (1);
 }
 
-t_map			*proj_mapping(char **map)
+t_map			*projection_3d(char **map)
 {
-	t_list	*lst;
-	t_map	*map_iso;
-	t_point	*size;
+	t_point	***pts;
+	t_map	*map_3d;
+	t_point	size_tab;
+	t_point	size_map;
 
-	lst = lst_points(map);
-	size = ft_ptnew(0, 0, 0);
-	normalize(lst, size);
-	map_iso = ft_mapnew(size->x + 1, size->y + 1, '.');
-	if (!(fill_map(map_iso, lst)))
-		ft_putendl("Problem iso");
-	return (map_iso);
+	pts = get_points(map, &size_tab);
+	normalize(pts, &size_map);
+	map_3d = ft_mapnew(size_map.x + 1, size_map.y + 1, '.');
+	if (!(place_points(map_3d, pts, size_tab)))
+		ft_putendl("Problem filling map");
+	return (map_3d);
 }

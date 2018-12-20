@@ -6,7 +6,7 @@
 #    By: sregnard <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/11/07 14:51:18 by sregnard          #+#    #+#              #
-#    Updated: 2018/12/19 14:21:47 by sregnard         ###   ########.fr        #
+#    Updated: 2018/12/20 14:10:43 by sregnard         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -98,6 +98,7 @@ SUBDIR		=	ft_pt/
 SRCNAME		=	ft_ptnew.c \
 				ft_ptcpy.c \
 				ft_ptset.c \
+				ft_ptprint.c \
 				ft_ptfree.c
 SRC			+=	$(addprefix $(SRCDIR)$(SUBDIR), $(SRCNAME))
 

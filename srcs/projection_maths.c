@@ -6,7 +6,7 @@
 /*   By: sregnard <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/19 13:47:15 by sregnard          #+#    #+#             */
-/*   Updated: 2018/12/19 14:06:14 by sregnard         ###   ########.fr       */
+/*   Updated: 2018/12/20 14:52:07 by sregnard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,5 +20,7 @@ t_point	*proj_isometric(t_point *p)
 		return (NULL);
 	pt->x = 2 * (p->x - p->y);
 	pt->y = p->x + p->y - 2 * p->z;
+	pt->x *= 1;
+	pt->y *= 1;
 	return (pt);
 }
