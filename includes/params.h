@@ -6,7 +6,7 @@
 /*   By: sregnard <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/14 13:37:06 by sregnard          #+#    #+#             */
-/*   Updated: 2018/12/18 09:18:24 by sregnard         ###   ########.fr       */
+/*   Updated: 2018/12/20 15:19:03 by sregnard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,15 +17,18 @@
 # include "mlx.h"
 # include "fdf_xpm.h"
 
+# define KEY_ESCAPE 53
+
 typedef struct	s_params
 {
 	void		*mlx;
 	void		*win;
-	t_point		*win_size;
-	t_map		*xpm;
+	void		*img;
+	t_point		*size;
 }				t_params;
 
-t_params		*params_new(t_map *xpm);
+t_params		*params_new(void);
+int				get_input(int keycode, void *params);
 void			params_free(t_params **params);
 
 #endif

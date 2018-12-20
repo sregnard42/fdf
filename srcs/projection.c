@@ -6,7 +6,7 @@
 /*   By: sregnard <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/20 13:36:45 by sregnard          #+#    #+#             */
-/*   Updated: 2018/12/20 14:43:01 by sregnard         ###   ########.fr       */
+/*   Updated: 2018/12/20 15:55:29 by sregnard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,7 +84,7 @@ static int		place_points(t_map *map, t_point ***pts, t_point size_tab)
 	return (1);
 }
 
-t_map			*projection_3d(char **map)
+t_map			*projection_3d(char **map, t_point *size_window)
 {
 	t_point	***pts;
 	t_map	*map_3d;
@@ -93,6 +93,7 @@ t_map			*projection_3d(char **map)
 
 	pts = get_points(map, &size_tab);
 	normalize(pts, &size_map);
+	scale_to_window(pts, size_window, &size_map);
 	map_3d = ft_mapnew(size_map.x + 1, size_map.y + 1, '.');
 	if (!(place_points(map_3d, pts, size_tab)))
 		ft_putendl("Problem filling map");

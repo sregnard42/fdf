@@ -6,7 +6,7 @@
 /*   By: sregnard <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/20 14:06:52 by sregnard          #+#    #+#             */
-/*   Updated: 2018/12/20 14:44:11 by sregnard         ###   ########.fr       */
+/*   Updated: 2018/12/20 15:55:15 by sregnard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,8 +30,6 @@ static void	find_min_max(t_point ***pts, t_point *min, t_point *max)
 		while (pts[pos.y][pos.x])
 		{
 			pt = pts[pos.y][pos.x];
-			ft_ptprint(pt);
-			ft_putchar(' ');
 			if (min->z == -1)
 				ft_ptset(min, pt->x, pt->y, 0);
 			if (min->x > pt->x)
@@ -45,9 +43,7 @@ static void	find_min_max(t_point ***pts, t_point *min, t_point *max)
 			pos.x += 1;
 		}
 		ft_ptset(&pos, 0, pos.y + 1, 0);
-		ft_putln();
 	}
-	ft_putln();
 }
 
 /*
@@ -62,9 +58,6 @@ void		normalize(t_point ***pts, t_point *max)
 	t_point	pos;
 
 	find_min_max(pts, &min, max);
-	ft_putstr("min : ");
-	ft_ptprint(&min);
-	ft_putln();
 	ft_ptset(&pos, 0, 0, 0);
 	while (pts && pts[pos.y])
 	{
@@ -73,16 +66,23 @@ void		normalize(t_point ***pts, t_point *max)
 			pt = pts[pos.y][pos.x];
 			pt->x = pt->x - min.x;
 			pt->y = pt->y - min.y;
-			ft_ptprint(pt);
-			ft_putchar(' ');
 			pos.x += 1;
 		}
 		ft_ptset(&pos, 0, pos.y + 1, 0);
-		ft_putln();
 	}
 	max->x = max->x - min.x;
 	max->y = max->y - min.y;
-	ft_putln();
+}
+
+void		scale_to_window(t_point ***pts, t_point *size_win, t_point *max)
+{
+	int	ratio_width;
+	int	ratio_height;
+	int	ratio;
+
+	ratio_width = size_win->x / max->x;
+	ratio_height = size_win->y / max->y;
+	
 }
 
 /*

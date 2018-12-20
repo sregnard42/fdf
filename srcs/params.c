@@ -6,44 +6,34 @@
 /*   By: sregnard <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/18 09:25:13 by sregnard          #+#    #+#             */
-/*   Updated: 2018/12/19 14:34:45 by sregnard         ###   ########.fr       */
+/*   Updated: 2018/12/20 15:22:15 by sregnard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "params.h"
 
-static void		set_win_size(t_params *params)
-{
-	float	ratio;
-
-	ratio = (params->xpm)->width / (params->xpm)->height;
-	params->win_size = (t_point *)malloc(sizeof(t_point));
-	params->win_size->x = (params->xpm)->width * 1;
-	params->win_size->y = (params->xpm)->height * 1;
-	if (params->win_size->x > 1280 || params->win_size->y > 720)
-	{
-		if (ratio > 1)
-		{
-			params->win_size->x = 1280;
-			params->win_size->y = 1280 / ratio;
-		}
-		else
-		{
-			params->win_size->y = 720;
-			params->win_size->x = 720 / ratio;
-		}
-	}
-}
-
-t_params		*params_new(t_map *xpm)
+t_params		*params_new()
 {
 	t_params	*params;
 
 	params = (t_params *)malloc(sizeof(t_params));
 	params->mlx = mlx_init();
-	params->xpm = xpm;
-	set_win_size(params);
+	params->size = ft_ptnew(2560, 1440, 0);
+	params->win = mlx_new_window(params->mlx, params->size->x, params->size->y,
+			"FdF");
+	mlx_key_hook(params->win, &get_input, params);
+	params->img = NULL;
 	return (params);
+}
+
+int				get_input(int keycode, void *params)
+{
+	if (keycode == KEY_ESCAPE)
+	{
+		params_free((t_params **)&params);
+		exit(EXIT_SUCCESS);
+	}
+	return (0);
 }
 
 void			params_free(t_params **ptr_params)
@@ -51,7 +41,4 @@ void			params_free(t_params **ptr_params)
 	t_params *params;
 
 	params = *ptr_params;
-	mlx_destroy_window(params->mlx, params->win);
-	ft_memdel((void **)&(params->mlx));
-	ft_memdel((void **)ptr_params);
 }

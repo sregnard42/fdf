@@ -6,7 +6,7 @@
 /*   By: sregnard <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/19 13:51:33 by sregnard          #+#    #+#             */
-/*   Updated: 2018/12/20 14:44:42 by sregnard         ###   ########.fr       */
+/*   Updated: 2018/12/20 15:45:30 by sregnard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 
 # include "libft.h"
 
-t_map	*projection_3d(char **map);
+t_map	*projection_3d(char **map, t_point *size_window);
 
 t_point	*proj_isometric(t_point *p);
 
