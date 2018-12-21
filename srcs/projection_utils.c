@@ -6,7 +6,7 @@
 /*   By: sregnard <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/20 14:06:52 by sregnard          #+#    #+#             */
-/*   Updated: 2018/12/21 11:36:26 by sregnard         ###   ########.fr       */
+/*   Updated: 2018/12/21 13:25:03 by sregnard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,8 @@
 #include "draw.h"
 
 /*
- ** Find both minimum x and y and both maximum x and y
- */
+** Find both minimum x and y and both maximum x and y
+*/
 
 static void	find_min_max(t_point ***pts, t_point *min, t_point *max)
 {
@@ -47,9 +47,9 @@ static void	find_min_max(t_point ***pts, t_point *min, t_point *max)
 }
 
 /*
- ** Normalize points so that there is no negative coordinates
- ** Max will store both the maximum x and y AFTER normalization
- */
+** Normalize points so that there is no negative coordinates
+** Max will store both the maximum x and y AFTER normalization
+*/
 
 void		normalize(t_point ***pts, t_point *max)
 {
@@ -102,8 +102,8 @@ void		scale_to_window(t_point ***pts, t_point *size_win, t_point *max)
 }
 
 /*
- **	Link points by drawing lines between then
- */
+**	Link points by drawing lines between then
+*/
 
 void		draw_all_lines(t_map *map, t_point ***pts, t_point size_tab,
 		t_point pos)
@@ -115,11 +115,11 @@ void		draw_all_lines(t_map *map, t_point ***pts, t_point size_tab,
 	if (pos.x + 1 < size_tab.x)
 	{
 		pt2 = pts[pos.y][pos.x + 1];
-		draw_line(map, *pt, *pt2);
+		draw_line(map, *pt, *pt2, '*');
 	}
 	if (pos.y + 1 < size_tab.y)
 	{
 		pt2 = pts[pos.y + 1][pos.x];
-		draw_line(map, *pt, *pt2);
+		draw_line(map, *pt, *pt2, '*');
 	}
 }

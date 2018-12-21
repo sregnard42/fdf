@@ -6,13 +6,13 @@
 /*   By: sregnard <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/14 08:36:46 by sregnard          #+#    #+#             */
-/*   Updated: 2018/12/20 14:37:45 by sregnard         ###   ########.fr       */
+/*   Updated: 2018/12/21 12:57:46 by sregnard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "draw.h"
 
-void	draw_line(t_map *xpm, t_point p1, t_point p2)
+void	draw_line(t_map *xpm, t_point p1, t_point p2, char c)
 {
 	t_point	d;
 	t_point	s;
@@ -26,7 +26,7 @@ void	draw_line(t_map *xpm, t_point p1, t_point p2)
 	err = (d.x > d.y) ? d.x / 2 : d.y / 2;
 	while (p1.y != p2.y && p1.x != p2.x)
 	{
-		xpm->map[p1.y][p1.x] = '*';
+		xpm->map[p1.y][p1.x] = c;
 		e2 = err;
 		if (e2 > -d.x)
 		{

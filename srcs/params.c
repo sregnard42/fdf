@@ -6,13 +6,13 @@
 /*   By: sregnard <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/18 09:25:13 by sregnard          #+#    #+#             */
-/*   Updated: 2018/12/20 15:22:15 by sregnard         ###   ########.fr       */
+/*   Updated: 2018/12/21 13:25:30 by sregnard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "params.h"
 
-t_params		*params_new()
+t_params		*params_new(void)
 {
 	t_params	*params;
 
