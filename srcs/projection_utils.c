@@ -6,7 +6,7 @@
 /*   By: sregnard <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/20 14:06:52 by sregnard          #+#    #+#             */
-/*   Updated: 2018/12/20 15:55:15 by sregnard         ###   ########.fr       */
+/*   Updated: 2018/12/21 11:36:26 by sregnard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,13 +76,29 @@ void		normalize(t_point ***pts, t_point *max)
 
 void		scale_to_window(t_point ***pts, t_point *size_win, t_point *max)
 {
-	int	ratio_width;
-	int	ratio_height;
-	int	ratio;
+	t_point	pos;
+	t_point	*pt;
+	float	ratio_width;
+	float	ratio_height;
+	float	ratio;
 
-	ratio_width = size_win->x / max->x;
-	ratio_height = size_win->y / max->y;
-	
+	ratio_width = (float)size_win->x / max->x;
+	ratio_height = (float)size_win->y / max->y;
+	ratio = ratio_width < ratio_height ? ratio_width : ratio_height;
+	max->x = max->x * ratio;
+	max->y = max->y * ratio;
+	ft_ptset(&pos, 0, 0, 0);
+	while (pts && pts[pos.y])
+	{
+		while (pts[pos.y][pos.x])
+		{
+			pt = pts[pos.y][pos.x];
+			pt->x = pt->x * ratio;
+			pt->y = pt->y * ratio;
+			pos.x += 1;
+		}
+		ft_ptset(&pos, 0, pos.y + 1, 0);
+	}
 }
 
 /*
