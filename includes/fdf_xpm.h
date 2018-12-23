@@ -6,7 +6,7 @@
 /*   By: sregnard <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/17 08:08:27 by sregnard          #+#    #+#             */
-/*   Updated: 2018/12/18 09:20:24 by sregnard         ###   ########.fr       */
+/*   Updated: 2018/12/22 22:32:04 by sregnard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,14 +17,26 @@
 
 # define XPM_LINE_0				"/* XPM */"
 # define XPM_LINE_1				"static char * blarg_xpm[] = {"
-# define XPM_COLORS				"2"
+# define XPM_COLORS				"8"
 # define XPM_CHARS_PER_PIXEL	"1"
 
-# define COLOR_WHITE			"#ffffff"
-# define COLOR_BLACK			"#000000"
-# define COLOR_RED				"#ff0000"
-# define COLOR_GREEN			"#00ff00"
-# define COLOR_BLUE				"#0000ff"
+# define COLOR_BLACK             '.'
+# define COLOR_WHITE             '*'
+# define COLOR_BLUE              'B'
+# define COLOR_CYAN              'C'
+# define COLOR_GREEN             'G'
+# define COLOR_YELLOW            'Y'
+# define COLOR_ORANGE            'O'
+# define COLOR_RED               'R'
+
+# define HEXA_BLACK			    "#000000"
+# define HEXA_WHITE			    "#ffffff"
+# define HEXA_BLUE				"#0000ff"
+# define HEXA_CYAN              "#00ffff"
+# define HEXA_GREEN			    "#00ff00"
+# define HEXA_YELLOW            "#ffff00"
+# define HEXA_ORANGE            "#ff7f00"
+# define HEXA_RED				"#ff0000"
 
 t_map			*xpm_new(char **map);
 

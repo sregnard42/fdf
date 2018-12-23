@@ -6,7 +6,7 @@
 /*   By: sregnard <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/14 13:37:06 by sregnard          #+#    #+#             */
-/*   Updated: 2018/12/20 15:19:03 by sregnard         ###   ########.fr       */
+/*   Updated: 2018/12/21 19:15:34 by sregnard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,13 +18,14 @@
 # include "fdf_xpm.h"
 
 # define KEY_ESCAPE 53
+# define WIN_WIDTH  1280
+# define WIN_HEIGHT 720
 
 typedef struct	s_params
 {
 	void		*mlx;
 	void		*win;
 	void		*img;
-	t_point		*size;
 }				t_params;
 
 t_params		*params_new(void);

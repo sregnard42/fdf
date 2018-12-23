@@ -6,7 +6,7 @@
 /*   By: sregnard <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/20 13:36:45 by sregnard          #+#    #+#             */
-/*   Updated: 2018/12/21 11:06:45 by sregnard         ###   ########.fr       */
+/*   Updated: 2018/12/23 11:55:32 by sregnard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 
 static t_point	*get_point(t_point *pos)
 {
-	return (proj_isometric(pos));
+	return (proj_parallel(pos));
 }
 
 static int		process_line(t_point ***pts, char **line, t_point pos)
@@ -39,20 +39,25 @@ static int		process_line(t_point ***pts, char **line, t_point pos)
 **	Create a list of points representing the projection
 */
 
+#include "errors.h"
+
 static t_point	***get_points(char **map, t_point *size)
 {
 	t_point	***pts;
 	t_point pos;
 	char	**line;
 
-	size->y = ft_nb_str_tab(map);
+	ft_ptset(size, -1, ft_nb_str_tab(map), 0);
 	pts = (t_point ***)malloc(sizeof(t_point **) * (size->y + 1));
 	pts[size->y] = NULL;
 	ft_ptset(&pos, 0, 0, 0);
 	while (pos.y < size->y)
 	{
 		line = ft_strsplit(map[pos.y], ' ');
-		size->x = ft_nb_str_tab(line);
+		if (size->x == -1)
+			size->x = ft_nb_str_tab(line);
+		else if (size->x != ft_nb_str_tab(line))
+			trigger_error("Line wrong length.");
 		pts[pos.y] = (t_point **)malloc(sizeof(t_point *) * (size->x + 1));
 		pts[pos.y][size->x] = NULL;
 		process_line(pts, line, pos);
@@ -84,7 +89,7 @@ static int		place_points(t_map *map, t_point ***pts, t_point size_tab)
 	return (1);
 }
 
-t_map			*projection_3d(char **map, t_point *size_window)
+t_map			*projection_3d(char **map)
 {
 	t_point	***pts;
 	t_map	*map_3d;
@@ -93,8 +98,9 @@ t_map			*projection_3d(char **map, t_point *size_window)
 
 	pts = get_points(map, &size_tab);
 	normalize(pts, &size_map);
-	scale_to_window(pts, size_window, &size_map);
-	map_3d = ft_mapnew(size_map.x + 1, size_map.y + 1, '.');
+	scale_to_window(pts, &size_map);
+	if (!(map_3d = ft_mapnew(size_map.x + 1, size_map.y + 1, '.')))
+		return (NULL);
 	if (!(place_points(map_3d, pts, size_tab)))
 		ft_putendl("Problem filling map");
 	return (map_3d);
