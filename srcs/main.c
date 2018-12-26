@@ -6,7 +6,7 @@
 /*   By: sregnard <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/13 11:05:50 by sregnard          #+#    #+#             */
-/*   Updated: 2018/12/23 11:18:25 by sregnard         ###   ########.fr       */
+/*   Updated: 2018/12/26 14:44:18 by sregnard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,9 @@
 
 int				main(int ac, char **av)
 {
-	t_params	*params;
+	t_params	params;
 	char		**file_content;
-	t_map		*xpm;
+	t_map		xpm;
 	t_map		projection;
 
 	if (ac != 2)
@@ -25,19 +25,19 @@ int				main(int ac, char **av)
 	if (!(file_content = read_file(av[1])))
 		trigger_error(ERR_FILE);
 	ft_putendl("Initialization of parameters...");
-	if (!(params = params_new()))
-		trigger_error("Error while creating mlx window.");
+	params_init(&params);
 	ft_putendl("Calculating 3D projection...");
 	projection = *(projection_3d(file_content));
-	ft_putendl("Converting to XPM format");
-	if (!(xpm = xpm_new((projection.map))))
-		trigger_error("Error while converting map to XPM format.");
 	ft_free_tab(&file_content);
+	ft_putendl("Converting to XPM format...");
+	xpm_conversion(&xpm, projection.map);
+	ft_free_tab(&(projection.map));
 	ft_putendl("Creating image...");
-	params->img = mlx_xpm_to_image(params->mlx, xpm->map,
-			&(xpm->width), &(xpm->height));
+	params.img = mlx_xpm_to_image(params.mlx, xpm.map,
+			&(xpm.width), &(xpm.height));
+	ft_free_tab(&(xpm.map));
 	ft_putendl("Display image in window...");
-	mlx_put_image_to_window(params->mlx, params->win, params->img, 0, 0);
-	mlx_loop(params->mlx);
+	mlx_put_image_to_window(params.mlx, params.win, params.img, 0, 0);
+	mlx_loop(params.mlx);
 	return (0);
 }

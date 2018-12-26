@@ -6,7 +6,7 @@
 #    By: sregnard <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/11/07 14:51:18 by sregnard          #+#    #+#              #
-#    Updated: 2018/12/19 14:56:15 by sregnard         ###   ########.fr        #
+#    Updated: 2018/12/24 13:01:52 by sregnard         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -27,7 +27,7 @@ SRCDIR			=	srcs/
 SRCNAME			= 	main.c \
 					errors.c \
 					params.c \
-					fdf_xpm.c \
+					xpm.c \
 					projection.c \
 					projection_utils.c \
 					projection_maths.c \

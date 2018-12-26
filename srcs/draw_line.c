@@ -6,7 +6,7 @@
 /*   By: sregnard <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/14 08:36:46 by sregnard          #+#    #+#             */
-/*   Updated: 2018/12/23 11:53:05 by sregnard         ###   ########.fr       */
+/*   Updated: 2018/12/23 19:07:02 by sregnard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,8 @@ static void	init_values(t_point *p1, t_point *p2, t_point *d, t_point *s, float 
 
 int		end_reached(t_point s, t_point p1, t_point p2)
 {
-	return ((s.x == 1 && p1.x > p2.x)
+	return ((p1.x == p2.x && p1.y == p2.y)
+			|| (s.x == 1 && p1.x > p2.x)
 			|| (s.y == 1 && p1.y > p2.y)
 			|| (s.x == -1 && p2.x > p1.x)
 			|| (s.y == -1 && p2.y > p1.y));

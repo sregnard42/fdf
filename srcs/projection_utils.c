@@ -6,7 +6,7 @@
 /*   By: sregnard <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/20 14:06:52 by sregnard          #+#    #+#             */
-/*   Updated: 2018/12/23 11:37:40 by sregnard         ###   ########.fr       */
+/*   Updated: 2018/12/26 14:35:25 by sregnard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,8 @@
 #include "draw.h"
 
 /*
-** Find both minimum x and y and both maximum x and y
-*/
+ ** Find both minimum x and y and both maximum x and y
+ */
 
 static void	find_min_max(t_point ***pts, t_point *min, t_point *max)
 {
@@ -47,9 +47,9 @@ static void	find_min_max(t_point ***pts, t_point *min, t_point *max)
 }
 
 /*
-** Normalize points so that there is no negative coordinates
-** Max will store both the maximum x and y AFTER normalization
-*/
+ ** Normalize points so that there is no negative coordinates
+ ** Max will store both the maximum x and y AFTER normalization
+ */
 
 void		normalize(t_point ***pts, t_point *max)
 {
@@ -75,8 +75,8 @@ void		normalize(t_point ***pts, t_point *max)
 }
 
 /*
-**	Scale image to window
-*/
+ **	Scale image to window
+ */
 
 void		scale_to_window(t_point ***pts, t_point *max)
 {
@@ -106,29 +106,23 @@ void		scale_to_window(t_point ***pts, t_point *max)
 }
 
 /*
-**	Find appropriate color depending on height and steep
-*/
+ **	Find appropriate color depending on height and steep
+ */
 
 char        find_color(t_point *pt1, t_point *pt2)
 {
-    if (pt1->z == 0 && pt2->z == 0)
-        return (COLOR_YELLOW);
-    if (pt1->z == pt2->z)
-        if (pt1->z < 0)
-            return (COLOR_GREEN);
-        else
-            return (COLOR_ORANGE);
-    else
-        if (pt1->z <= 0 && pt2->z <= 0)
-            return (COLOR_BLUE);
-        if (pt1->z >= 0 && pt2->z >= 0)
-            return (COLOR_RED);
-    return (COLOR_WHITE);
+	if (pt1->z == 0 && pt2->z == 0)
+		return (COLOR_BLUE);
+	if (pt1->z < 0)
+		return (COLOR_GREEN);
+	else
+		return (COLOR_YELLOW);
+	return (COLOR_WHITE);
 }
 
 /*
-**	Link points by drawing lines between then
-*/
+ **	Link points by drawing lines between then
+ */
 
 void		draw_all_lines(t_map *map, t_point ***pts, t_point size_tab,
 		t_point pos)

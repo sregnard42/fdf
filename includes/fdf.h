@@ -6,7 +6,7 @@
 /*   By: sregnard <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/17 08:06:57 by sregnard          #+#    #+#             */
-/*   Updated: 2018/12/20 15:19:12 by sregnard         ###   ########.fr       */
+/*   Updated: 2018/12/24 13:02:02 by sregnard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@
 # include "mlx.h"
 # include "errors.h"
 # include "params.h"
-# include "fdf_xpm.h"
+# include "xpm.h"
 # include "projection.h"
 # include "draw.h"
 

@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   fdf_xpm.c                                          :+:      :+:    :+:   */
+/*   xpm.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: sregnard <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/17 08:11:11 by sregnard          #+#    #+#             */
-/*   Updated: 2018/12/23 11:38:11 by sregnard         ###   ########.fr       */
+/*   Updated: 2018/12/24 13:04:48 by sregnard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "fdf_xpm.h"
+#include "xpm.h"
 
 static void	add_color(t_map *xpm, char c, char *color, int i)
 {
@@ -47,20 +47,20 @@ static void	header_and_footer(t_map *xpm, int size)
 	xpm->map[size] = 0;
 }
 
-static void	fdf_to_xpm(t_map *xpm, char **fdf)
+void	xpm_conversion(t_map *xpm, char **map)
 {
 	int		size;
 	int		i;
 
-	xpm->width = ft_strlen(*fdf);
-	xpm->height = ft_nb_str_tab(fdf);
+	xpm->width = ft_strlen(*map);
+	xpm->height = ft_nb_str_tab(map);
 	size = xpm->height + ft_atoi(XPM_COLORS) + 1;
 	if (!(xpm->map = (char **)malloc(sizeof(char *) * (size + 1))))
 		return ;
 	header_and_footer(xpm, size);
 	i = 1 + ft_atoi(XPM_COLORS);
-	while (i < size && fdf && *fdf)
-		xpm->map[i++] = ft_strdup(*fdf++);
+	while (i < size && map && *map)
+		xpm->map[i++] = ft_strdup(*map++);
 }
 
 t_map		*xpm_new(char **fdf)
@@ -69,6 +69,6 @@ t_map		*xpm_new(char **fdf)
 
 	xpm = (t_map *)malloc(sizeof(t_map));
 	if (xpm)
-		fdf_to_xpm(xpm, fdf);
+		xpm_conversion(xpm, fdf);
 	return (xpm);
 }
