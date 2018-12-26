@@ -6,22 +6,13 @@
 /*   By: sregnard <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/18 09:25:13 by sregnard          #+#    #+#             */
-/*   Updated: 2018/12/26 14:52:54 by sregnard         ###   ########.fr       */
+/*   Updated: 2018/12/26 22:00:47 by sregnard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "params.h"
 
-t_params		*params_new(void)
-{
-	t_params	*params;
-
-	params = (t_params *)malloc(sizeof(t_params));
-	params_init(params);
-	return (params);
-}
-
-void				params_init(t_params *params)
+void				params_mlx_init(t_params *params)
 {
 	params->mlx = mlx_init();
 	params->win = mlx_new_window(params->mlx, WIN_WIDTH, WIN_HEIGHT,

@@ -6,7 +6,7 @@
 /*   By: sregnard <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/18 08:45:09 by sregnard          #+#    #+#             */
-/*   Updated: 2018/12/18 08:46:13 by sregnard         ###   ########.fr       */
+/*   Updated: 2018/12/26 22:10:32 by sregnard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,6 @@
 
 void	ft_map_free(t_map **map)
 {
-	ft_free_tab(&((*map)->map));
+	ft_free_tab(&((*map)->data));
 	ft_memdel((void **)map);
 }

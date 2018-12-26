@@ -6,7 +6,7 @@
 #    By: sregnard <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/11/07 14:51:18 by sregnard          #+#    #+#              #
-#    Updated: 2018/12/20 14:10:43 by sregnard         ###   ########.fr        #
+#    Updated: 2018/12/26 22:10:50 by sregnard         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -134,6 +134,7 @@ SRC			+=	$(addprefix $(SRCDIR)$(SUBDIR), $(SRCNAME))
 
 SUBDIR		=	ft_map/
 SRCNAME		=	ft_mapnew.c \
+				ft_mapfrom.c \
 				ft_mapfree.c
 SRC			+=	$(addprefix $(SRCDIR)$(SUBDIR), $(SRCNAME))
 

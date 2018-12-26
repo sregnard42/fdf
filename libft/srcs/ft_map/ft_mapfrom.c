@@ -1,29 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   map.h                                              :+:      :+:    :+:   */
+/*   ft_mapfrom.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: sregnard <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/12/18 08:26:07 by sregnard          #+#    #+#             */
-/*   Updated: 2018/12/26 22:09:42 by sregnard         ###   ########.fr       */
+/*   Created: 2018/12/26 22:05:29 by sregnard          #+#    #+#             */
+/*   Updated: 2018/12/26 22:11:09 by sregnard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MAP_H
-# define MAP_H
+#include "map.h"
 
-# include "libft.h"
-
-typedef struct	s_map
+t_map	*ft_mapfrom(char **data)
 {
-	char		**data;
-	int			width;
-	int			height;
-}				t_map;
+	t_map	*map;
 
-t_map			*ft_mapnew(int width, int height, char c);
-t_map			*ft_mapfrom(char **data);
-void			ft_mapfree(t_map **map);
-
-#endif
+	if (!(map = (t_map *)malloc(sizeof(t_map))))
+		return (NULL);
+	map->data = data;
+	map->height = ft_nb_str_tab(data);
+	map->width = ft_strlen(*data);
+	return (map);
+}

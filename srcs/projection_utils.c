@@ -6,7 +6,7 @@
 /*   By: sregnard <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/20 14:06:52 by sregnard          #+#    #+#             */
-/*   Updated: 2018/12/26 14:35:25 by sregnard         ###   ########.fr       */
+/*   Updated: 2018/12/26 21:44:55 by sregnard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,29 +17,32 @@
  ** Find both minimum x and y and both maximum x and y
  */
 
-static void	find_min_max(t_point ***pts, t_point *min, t_point *max)
+void	find_min_max(t_point ***pts, t_point *min, t_point *max)
 {
 	t_point *pt;
 	t_point	pos;
 
 	ft_ptset(&pos, 0, 0, 0);
-	ft_ptset(min, 0, 0, -1);
 	ft_ptset(max, 0, 0, 0);
 	while (pts && pts[pos.y])
 	{
 		while (pts[pos.y][pos.x])
 		{
 			pt = pts[pos.y][pos.x];
-			if (min->z == -1)
-				ft_ptset(min, pt->x, pt->y, 0);
+			if (pos.y == 0 && pos.x == 0)
+				ft_ptset(min, pt->x, pt->y, pt->z);
 			if (min->x > pt->x)
 				min->x = pt->x;
 			if (min->y > pt->y)
 				min->y = pt->y;
+			if (min->z > pt->z)
+				min->z = pt->z;
 			if (max->x < pt->x)
 				max->x = pt->x;
 			if (max->y < pt->y)
 				max->y = pt->y;
+			if (max->z < pt->z)
+				max->z = pt->z;
 			pos.x += 1;
 		}
 		ft_ptset(&pos, 0, pos.y + 1, 0);
@@ -51,27 +54,25 @@ static void	find_min_max(t_point ***pts, t_point *min, t_point *max)
  ** Max will store both the maximum x and y AFTER normalization
  */
 
-void		normalize(t_point ***pts, t_point *max)
+void		normalize(t_point ***pts, t_point *min, t_point *max)
 {
 	t_point *pt;
-	t_point	min;
 	t_point	pos;
 
-	find_min_max(pts, &min, max);
 	ft_ptset(&pos, 0, 0, 0);
 	while (pts && pts[pos.y])
 	{
 		while (pts[pos.y][pos.x])
 		{
 			pt = pts[pos.y][pos.x];
-			pt->x = pt->x - min.x;
-			pt->y = pt->y - min.y;
+			pt->x = pt->x - min->x;
+			pt->y = pt->y - min->y;
 			pos.x += 1;
 		}
 		ft_ptset(&pos, 0, pos.y + 1, 0);
 	}
-	max->x = max->x - min.x;
-	max->y = max->y - min.y;
+	max->x = max->x - min->x;
+	max->y = max->y - min->y;
 }
 
 /*
