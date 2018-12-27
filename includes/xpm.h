@@ -6,7 +6,7 @@
 /*   By: sregnard <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/17 08:08:27 by sregnard          #+#    #+#             */
-/*   Updated: 2018/12/24 13:01:37 by sregnard         ###   ########.fr       */
+/*   Updated: 2018/12/27 09:25:47 by sregnard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,8 @@
 # define FDF_XPM_H
 
 # include "libft.h"
+# include "params.h"
+# include "errors.h"
 
 # define XPM_LINE_0				"/* XPM */"
 # define XPM_LINE_1				"static char * blarg_xpm[] = {"
@@ -38,7 +40,7 @@
 # define HEXA_ORANGE            "#ff7f00"
 # define HEXA_RED				"#ff0000"
 
-t_map			*xpm_new(char **map);
-void			xpm_conversion(t_map *xpm, char **map);
+t_map			*xpm_new(t_params *params);
+void			xpm_conversion(t_params *params);
 
 #endif

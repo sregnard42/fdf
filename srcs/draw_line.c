@@ -6,7 +6,7 @@
 /*   By: sregnard <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/14 08:36:46 by sregnard          #+#    #+#             */
-/*   Updated: 2018/12/23 19:07:02 by sregnard         ###   ########.fr       */
+/*   Updated: 2018/12/27 09:52:20 by sregnard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ int		end_reached(t_point s, t_point p1, t_point p2)
 			|| (s.y == -1 && p2.y > p1.y));
 }
 
-void		draw_line(t_map *xpm, t_point p1, t_point p2, char c)
+void		draw_line(t_map *map, t_point p1, t_point p2, char c)
 {
 	t_point	d;
 	t_point	s;
@@ -40,7 +40,7 @@ void		draw_line(t_map *xpm, t_point p1, t_point p2, char c)
 	init_values(&p1, &p2, &d, &s, &err);
 	while (!end_reached(s, p1, p2))
 	{
-		xpm->map[p1.y][p1.x] = c;
+		map->data[p1.y][p1.x] = c;
 		err2 = err;
 		if (err2 > -d.x)
 		{

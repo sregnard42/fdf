@@ -6,7 +6,7 @@
 /*   By: sregnard <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/17 08:11:11 by sregnard          #+#    #+#             */
-/*   Updated: 2018/12/26 22:27:52 by sregnard         ###   ########.fr       */
+/*   Updated: 2018/12/27 11:21:57 by sregnard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,9 @@
 
 static void	add_color(t_map *xpm, char c, char *color, int i)
 {
-	xpm->map[1 + i] = ft_strdup(&c);
-	xpm->map[1 + i] = ft_stradd(xpm->map[1 + i], " c ");
-	xpm->map[1 + i] = ft_stradd(xpm->map[1 + i], color);
+	xpm->data[1 + i] = ft_strdup(&c);
+	xpm->data[1 + i] = ft_stradd(xpm->data[1 + i], " c ");
+	xpm->data[1 + i] = ft_stradd(xpm->data[1 + i], color);
 }
 
 static void add_all_colors(t_map *xpm)
@@ -36,39 +36,43 @@ static void add_all_colors(t_map *xpm)
 
 static void	header_and_footer(t_map *xpm, int size)
 {
-	xpm->map[0] = ft_strdup(ft_itoa(xpm->width));
-	xpm->map[0] = ft_stradd(xpm->map[0], " ");
-	xpm->map[0] = ft_stradd(xpm->map[0], ft_itoa(xpm->height));
-	xpm->map[0] = ft_stradd(xpm->map[0], " ");
-	xpm->map[0] = ft_stradd(xpm->map[0], XPM_COLORS);
-	xpm->map[0] = ft_stradd(xpm->map[0], " ");
-	xpm->map[0] = ft_stradd(xpm->map[0], XPM_CHARS_PER_PIXEL);
+	xpm->data[0] = ft_strdup(ft_itoa(xpm->width));
+	xpm->data[0] = ft_stradd(xpm->data[0], " ");
+	xpm->data[0] = ft_stradd(xpm->data[0], ft_itoa(xpm->height));
+	xpm->data[0] = ft_stradd(xpm->data[0], " ");
+	xpm->data[0] = ft_stradd(xpm->data[0], XPM_COLORS);
+	xpm->data[0] = ft_stradd(xpm->data[0], " ");
+	xpm->data[0] = ft_stradd(xpm->data[0], XPM_CHARS_PER_PIXEL);
     add_all_colors(xpm);
-	xpm->map[size] = 0;
+	xpm->data[size] = 0;
 }
 
-void	xpm_conversion(t_params *params)
+void	xpm_conversion(t_params *p)
 {
 	int		size;
 	int		i;
+	int		j;
 
-	params->xpm->width = ft_strlen(*map);
-	params->xpm->height = ft_nb_str_tab(map);
-	size = xpm->height + ft_atoi(XPM_COLORS) + 1;
-	if (!(params->xpm->data = (char **)malloc(sizeof(char *) * (size + 1))))
-		trigger_error("Couldn't malloc in xpm_conversion");
-	header_and_footer(params->xpm, size);
+	if (!(p->xpm = (t_map *)malloc(sizeof(t_map))))
+		trigger_error("Error malloc xpm xpm_conversion", p);
+	p->xpm->width = p->output->width;
+	p->xpm->height = p->output->height;
+	size = p->xpm->height + ft_atoi(XPM_COLORS) + 1;
+	if (!(p->xpm->data = (char **)malloc(sizeof(char *) * (size + 1))))
+		trigger_error("Erroc malloc xpm->data xpm_conversion", p);
+	header_and_footer(p->xpm, size);
 	i = 1 + ft_atoi(XPM_COLORS);
-	while (i < size && params->output && params->*output)
-		params->xpm->data[i++] = ft_strdup(*params->output++);
+	j = 0;
+	while (i < size && p->output->data && p->output->data[j])
+		p->xpm->data[i++] = ft_strdup(p->output->data[j++]);
 }
 
-t_map		*xpm_new(char **fdf)
+t_map		*xpm_new(t_params *params)
 {
 	t_map	*xpm;
 
 	xpm = (t_map *)malloc(sizeof(t_map));
 	if (xpm)
-		xpm_conversion(xpm, fdf);
+		xpm_conversion(params);
 	return (xpm);
 }

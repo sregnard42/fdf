@@ -6,13 +6,13 @@
 /*   By: sregnard <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/18 08:45:09 by sregnard          #+#    #+#             */
-/*   Updated: 2018/12/26 22:10:32 by sregnard         ###   ########.fr       */
+/*   Updated: 2018/12/27 10:28:22 by sregnard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void	ft_map_free(t_map **map)
+void	ft_mapfree(t_map **map)
 {
 	ft_free_tab(&((*map)->data));
 	ft_memdel((void **)map);

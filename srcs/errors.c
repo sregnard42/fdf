@@ -6,7 +6,7 @@
 /*   By: sregnard <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/24 09:15:29 by sregnard          #+#    #+#             */
-/*   Updated: 2018/12/09 14:58:58 by jdugoudr         ###   ########.fr       */
+/*   Updated: 2018/12/27 11:19:52 by sregnard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@
 ** SET DEBUG AT 1 in errors.h to show more errors
 */
 
-void	trigger_error(char *err_msg)
+void	trigger_error(char *err_msg, t_params *p)
 {
 	if (ft_strequ(err_msg, ERR_USAGE))
 		ft_putendl(ERR_USAGE);
@@ -28,5 +28,6 @@ void	trigger_error(char *err_msg)
 	}
 	else
 		ft_putendl(MSG_ERR);
+	params_free(p);
 	exit(EXIT_FAILURE);
 }

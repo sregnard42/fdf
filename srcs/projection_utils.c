@@ -6,12 +6,13 @@
 /*   By: sregnard <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/20 14:06:52 by sregnard          #+#    #+#             */
-/*   Updated: 2018/12/26 21:44:55 by sregnard         ###   ########.fr       */
+/*   Updated: 2018/12/27 10:21:26 by sregnard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 #include "draw.h"
+#include "xpm.h"
 
 /*
  ** Find both minimum x and y and both maximum x and y
@@ -107,17 +108,27 @@ void		scale_to_window(t_point ***pts, t_point *max)
 }
 
 /*
- **	Find appropriate color depending on height and steep
+ **	The higher the height compared to max height the hotter the color
  */
 
-char        find_color(t_point *pt1, t_point *pt2)
+char        find_color(t_params *p, t_point *pt1, t_point *pt2)
 {
-	if (pt1->z == 0 && pt2->z == 0)
+	float val;
+
+	val = (pt1->z + pt2->z) / 2;
+	val = (val / p->max.z) * 100;
+	if (val <= 0)
 		return (COLOR_BLUE);
-	if (pt1->z < 0)
+	if (val <= 20)
+		return (COLOR_CYAN);
+	if (val <= 40)
 		return (COLOR_GREEN);
-	else
+	if (val <= 60)
 		return (COLOR_YELLOW);
+	if (val <= 80)
+		return (COLOR_ORANGE);
+	if (val <= 100)
+		return (COLOR_RED);
 	return (COLOR_WHITE);
 }
 
@@ -125,21 +136,20 @@ char        find_color(t_point *pt1, t_point *pt2)
  **	Link points by drawing lines between then
  */
 
-void		draw_all_lines(t_map *map, t_point ***pts, t_point size_tab,
-		t_point pos)
+void		draw_all_lines(t_params *p, t_point pos)
 {
 	t_point *pt1;
 	t_point *pt2;
 
-	pt1 = pts[pos.y][pos.x];
-	if (pos.x + 1 < size_tab.x)
+	pt1 = p->pts[pos.y][pos.x];
+	if (pos.x + 1 < p->input->width)
 	{
-		pt2 = pts[pos.y][pos.x + 1];
-		draw_line(map, *pt1, *pt2, find_color(pt1, pt2));
+		pt2 = p->pts[pos.y][pos.x + 1];
+		draw_line(p->output, *pt1, *pt2, find_color(p, pt1, pt2));
 	}
-	if (pos.y + 1 < size_tab.y)
+	if (pos.y + 1 < p->input->height)
 	{
-		pt2 = pts[pos.y + 1][pos.x];
-		draw_line(map, *pt1, *pt2, find_color(pt1, pt2));
+		pt2 = p->pts[pos.y + 1][pos.x];
+		draw_line(p->output, *pt1, *pt2, find_color(p, pt1, pt2));
 	}
 }
