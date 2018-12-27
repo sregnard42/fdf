@@ -6,7 +6,7 @@
 /*   By: sregnard <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/17 08:06:57 by sregnard          #+#    #+#             */
-/*   Updated: 2018/12/24 13:02:02 by sregnard         ###   ########.fr       */
+/*   Updated: 2018/12/27 15:16:07 by sregnard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,5 +20,7 @@
 # include "xpm.h"
 # include "projection.h"
 # include "draw.h"
+
+void			generate_image(t_params *p);
 
 #endif

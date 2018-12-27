@@ -6,7 +6,7 @@
 /*   By: sregnard <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/20 13:36:45 by sregnard          #+#    #+#             */
-/*   Updated: 2018/12/27 11:30:50 by sregnard         ###   ########.fr       */
+/*   Updated: 2018/12/27 17:07:43 by sregnard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,24 +15,28 @@
 #include "draw.h"
 #include "errors.h"
 
-static t_point	*get_point(t_point *pos)
+static t_point	*get_point(t_params *p, t_point *pos)
 {
-	return (proj_isometric(pos));
+	if (p->view == VIEW_ISOMETRIC)
+		return (proj_isometric(pos));
+	if (p->view == VIEW_PARALLEL)
+		return (proj_parallel(pos));
+	return (NULL);
 }
 
-static int		process_line(t_point ***pts, char **line, t_point pos)
+static int		process_line(t_params *p, char **line, t_point pos)
 {
 	t_point	*pt;
 
 	while (line[pos.x])
 	{
 		pos.z = ft_atoi(line[pos.x]);
-		if (!(pt = get_point(&pos)))
+		if (!(pt = get_point(p, &pos)))
 			return (0);
-		pts[pos.y][pos.x] = pt;
+		p->pts[pos.y][pos.x] = pt;
 		pos.x += 1;
 	}
-	pts[pos.y][pos.x] = NULL;
+	p->pts[pos.y][pos.x] = NULL;
 	return (1);
 }
 
@@ -40,35 +44,34 @@ static int		process_line(t_point ***pts, char **line, t_point pos)
  **	Create a list of points representing the projection
  */
 
-static t_point	***get_points(t_map *input, t_params *p)
+static void	get_points(t_params *p)
 {
-	t_point	***pts;
 	t_point pos;
 	char	**line;
 
-	if (!(pts = (t_point ***)malloc(sizeof(t_point **)
-					* (input->height + 1))))
+	if (!(p->pts = (t_point ***)malloc(sizeof(t_point **)
+					* (p->input->height + 1))))
 		trigger_error("Error malloc pts get_points", p);
-	pts[input->height] = NULL;
+	p->pts[p->input->height] = NULL;
 	ft_ptset(&pos, 0, 0, -1);
-	while (pos.y < input->height)
+	while (pos.y < p->input->height)
 	{
-		line = ft_strsplit(input->data[pos.y], ' ');
+		line = ft_strsplit(p->input->data[pos.y], ' ');
 		if (pos.z == -1)
 		{
 			pos.z += 1;
-			input->width = ft_nb_str_tab(line);
+			p->input->width = ft_nb_str_tab(line);
 		}
-		else if (input->width != ft_nb_str_tab(line))
+		else if (p->input->width != ft_nb_str_tab(line))
 			trigger_error("Wrong width get_points.", p);
-		if (!(pts[pos.y] = (t_point **)malloc(sizeof(t_point *)
-						* (input->width + 1))))
+		if (!(p->pts[pos.y] = (t_point **)malloc(sizeof(t_point *)
+						* (p->input->width + 1))))
 			trigger_error("Error malloc pts[y] get_points", p);
-		pts[pos.y][input->width] = NULL;
-		process_line(pts, line, pos);
+		p->pts[pos.y][p->input->width] = NULL;
+		process_line(p, line, pos);
+		ft_free_tab(&line);
 		pos.y += 1;
 	}
-	return (pts);
 }
 
 static void		place_points(t_params *p)
@@ -99,7 +102,7 @@ static void		place_points(t_params *p)
 
 void			projection_3d(t_params *p)
 {
-	p->pts = get_points(p->input, p);
+	get_points(p);
 	find_min_max(p->pts, &(p->min), &(p->max));
 	normalize(p->pts, &(p->min), &(p->max));
 	scale_to_window(p->pts, &(p->max));

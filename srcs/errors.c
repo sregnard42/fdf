@@ -6,7 +6,7 @@
 /*   By: sregnard <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/24 09:15:29 by sregnard          #+#    #+#             */
-/*   Updated: 2018/12/27 11:19:52 by sregnard         ###   ########.fr       */
+/*   Updated: 2018/12/27 12:37:42 by sregnard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,7 @@ void	trigger_error(char *err_msg, t_params *p)
 	}
 	else
 		ft_putendl(MSG_ERR);
-	params_free(p);
+	if (p)
+		params_free(p);
 	exit(EXIT_FAILURE);
 }

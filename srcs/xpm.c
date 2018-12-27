@@ -6,7 +6,7 @@
 /*   By: sregnard <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/17 08:11:11 by sregnard          #+#    #+#             */
-/*   Updated: 2018/12/27 11:21:57 by sregnard         ###   ########.fr       */
+/*   Updated: 2018/12/27 13:52:15 by sregnard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,9 +36,13 @@ static void add_all_colors(t_map *xpm)
 
 static void	header_and_footer(t_map *xpm, int size)
 {
-	xpm->data[0] = ft_strdup(ft_itoa(xpm->width));
+	char	*tmp;
+
+	xpm->data[0] = ft_itoa(xpm->width);
 	xpm->data[0] = ft_stradd(xpm->data[0], " ");
-	xpm->data[0] = ft_stradd(xpm->data[0], ft_itoa(xpm->height));
+	tmp = ft_itoa(xpm->height);
+	xpm->data[0] = ft_stradd(xpm->data[0], tmp);
+	free(tmp);
 	xpm->data[0] = ft_stradd(xpm->data[0], " ");
 	xpm->data[0] = ft_stradd(xpm->data[0], XPM_COLORS);
 	xpm->data[0] = ft_stradd(xpm->data[0], " ");

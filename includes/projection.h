@@ -6,7 +6,7 @@
 /*   By: sregnard <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/19 13:51:33 by sregnard          #+#    #+#             */
-/*   Updated: 2018/12/27 09:50:38 by sregnard         ###   ########.fr       */
+/*   Updated: 2018/12/27 17:07:33 by sregnard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,8 +30,8 @@ void	projection_3d(t_params *params);
 **	projection_maths.c
 */
 
-t_point	*proj_isometric(t_point *p);
-t_point	*proj_parallel(t_point *p);
+t_point	*proj_isometric(t_point *pt);
+t_point	*proj_parallel(t_point *pt);
 
 /*
 **	projection_utils.c
