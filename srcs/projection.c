@@ -6,7 +6,7 @@
 /*   By: sregnard <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/20 13:36:45 by sregnard          #+#    #+#             */
-/*   Updated: 2018/12/27 17:07:43 by sregnard         ###   ########.fr       */
+/*   Updated: 2018/12/29 15:42:03 by sregnard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 #include "projection.h"
 #include "draw.h"
 #include "errors.h"
+#include "defines.h"
 
 static t_point	*get_point(t_params *p, t_point *pos)
 {
@@ -21,6 +22,10 @@ static t_point	*get_point(t_params *p, t_point *pos)
 		return (proj_isometric(pos));
 	if (p->view == VIEW_PARALLEL)
 		return (proj_parallel(pos));
+	if (p->view == VIEW_CAVALIERE)
+		return (proj_cavaliere(pos));
+	if (p->view == VIEW_TOP)
+		return (proj_top(pos));
 	return (NULL);
 }
 
@@ -30,7 +35,7 @@ static int		process_line(t_params *p, char **line, t_point pos)
 
 	while (line[pos.x])
 	{
-		pos.z = ft_atoi(line[pos.x]);
+		pos.z = ft_atoi(line[pos.x]) * p->height_modifier;
 		if (!(pt = get_point(p, &pos)))
 			return (0);
 		p->pts[pos.y][pos.x] = pt;
@@ -53,17 +58,18 @@ static void	get_points(t_params *p)
 					* (p->input->height + 1))))
 		trigger_error("Error malloc pts get_points", p);
 	p->pts[p->input->height] = NULL;
-	ft_ptset(&pos, 0, 0, -1);
+	ft_ptset(&pos, 0, 0, 0);
 	while (pos.y < p->input->height)
 	{
+		p->pts[pos.y] = NULL;
 		line = ft_strsplit(p->input->data[pos.y], ' ');
-		if (pos.z == -1)
-		{
-			pos.z += 1;
+		if (pos.y == 0)
 			p->input->width = ft_nb_str_tab(line);
-		}
 		else if (p->input->width != ft_nb_str_tab(line))
-			trigger_error("Wrong width get_points.", p);
+		{
+			ft_free_tab(&line);
+			trigger_error("Line length changed.", p);
+		}
 		if (!(p->pts[pos.y] = (t_point **)malloc(sizeof(t_point *)
 						* (p->input->width + 1))))
 			trigger_error("Error malloc pts[y] get_points", p);

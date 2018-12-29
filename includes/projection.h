@@ -6,7 +6,7 @@
 /*   By: sregnard <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/19 13:51:33 by sregnard          #+#    #+#             */
-/*   Updated: 2018/12/27 17:07:33 by sregnard         ###   ########.fr       */
+/*   Updated: 2018/12/29 13:28:36 by sregnard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,8 @@ void	projection_3d(t_params *params);
 
 t_point	*proj_isometric(t_point *pt);
 t_point	*proj_parallel(t_point *pt);
+t_point	*proj_cavaliere(t_point *pt);
+t_point	*proj_top(t_point *pt);
 
 /*
 **	projection_utils.c

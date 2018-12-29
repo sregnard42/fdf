@@ -6,11 +6,12 @@
 /*   By: sregnard <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/18 09:25:13 by sregnard          #+#    #+#             */
-/*   Updated: 2018/12/27 16:46:44 by sregnard         ###   ########.fr       */
+/*   Updated: 2018/12/29 16:26:11 by sregnard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "params.h"
+#include "defines.h"
 
 void	params_init(t_params *params)
 {
@@ -23,13 +24,13 @@ void	params_init(t_params *params)
 	params->output = NULL;
 	params->xpm = NULL;
 	params->pts = NULL;
-	params->cte1 = 1;
-	params->cte2 = 1;
-	params->a = 45;
+	params->height_modifier = 1;
 }
 
 void	params_free_view(t_params *p)
 {
+	t_point	pos;
+
 	if (p->win)
 		mlx_clear_window(p->mlx, p->win);
 	if (p->img)
@@ -38,12 +39,15 @@ void	params_free_view(t_params *p)
 		ft_mapfree(&p->output);
 	if (p->xpm)
 		ft_mapfree(&p->xpm);
-	while (p->pts && *p->pts)
+	ft_ptset(&pos, 0, 0, 0);
+	while (p->pts && p->pts[pos.y])
 	{
-		while (**p->pts)
-			free(**p->pts++);
-		free(*p->pts++);
+		while (p->pts[pos.y][pos.x])
+			free(p->pts[pos.y][pos.x++]);
+		free(p->pts[pos.y]);
+		ft_ptset(&pos, 0, pos.y + 1, 0);
 	}
+	free(p->pts);
 }
 
 void	params_free(t_params *p)

@@ -6,13 +6,14 @@
 /*   By: sregnard <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/20 14:06:52 by sregnard          #+#    #+#             */
-/*   Updated: 2018/12/27 16:47:03 by sregnard         ###   ########.fr       */
+/*   Updated: 2018/12/29 14:28:11 by sregnard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 #include "draw.h"
 #include "xpm.h"
+#include "defines.h"
 
 /*
  ** Find both minimum x and y and both maximum x and y
@@ -24,14 +25,16 @@ void	find_min_max(t_point ***pts, t_point *min, t_point *max)
 	t_point	pos;
 
 	ft_ptset(&pos, 0, 0, 0);
-	ft_ptset(max, 0, 0, 0);
 	while (pts && pts[pos.y])
 	{
 		while (pts[pos.y][pos.x])
 		{
 			pt = pts[pos.y][pos.x];
 			if (pos.y == 0 && pos.x == 0)
+			{
 				ft_ptset(min, pt->x, pt->y, pt->z);
+				ft_ptset(max, pt->x, pt->y, pt->z);
+			}
 			if (min->x > pt->x)
 				min->x = pt->x;
 			if (min->y > pt->y)
@@ -113,10 +116,12 @@ void		scale_to_window(t_point ***pts, t_point *max)
 
 char        find_color(t_params *p, t_point *pt1, t_point *pt2)
 {
-	float val;
+	float	val;
 
 	val = (pt1->z + pt2->z) / 2;
-	val = (val / p->max.z) * 100;
+	val = (val / (p->max.z - p->min.z)) * 100;
+	if (val < 0)
+		val *= -1;
 	if (val <= 0)
 		return (COLOR_BLUE);
 	if (val <= 20)

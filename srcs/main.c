@@ -6,11 +6,12 @@
 /*   By: sregnard <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/13 11:05:50 by sregnard          #+#    #+#             */
-/*   Updated: 2018/12/27 17:12:31 by sregnard         ###   ########.fr       */
+/*   Updated: 2018/12/29 15:44:54 by sregnard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
+#include "defines.h"
 
 void	update_view(t_params *p)
 {
@@ -28,25 +29,31 @@ int	get_input(int keycode, t_params *params)
 	if (keycode == KEY_ESCAPE)
 	{
 		params_free(params);
+		while (1)
+			;
 		exit(EXIT_SUCCESS);
 	}
 	if (keycode == KEY_LEFT) 
 	{
 		if (params->view == 0)
-			params->view = 1;
+			params->view = 3;
 		else
 			params->view -= 1;
 	}
 	if (keycode == KEY_RIGHT)
 	{
-		if (params->view == 1)
+		if (params->view == 3)
 			params->view = 0;
 		else
 			params->view += 1;
 	}
-	if (keycode == KEY_LEFT || keycode == KEY_RIGHT
-			|| keycode == KEY_UP || keycode == KEY_DOWN)
-		update_view(params);
+	if (keycode == KEY_DOWN)
+		params->height_modifier -= 0.1;
+	if (keycode == KEY_UP)
+		params->height_modifier += 0.1;
+	if (keycode == KEY_DOT)
+		params->height_modifier = 1;
+	update_view(params);
 	return (1);
 }
 

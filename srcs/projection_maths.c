@@ -6,7 +6,7 @@
 /*   By: sregnard <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/19 13:47:15 by sregnard          #+#    #+#             */
-/*   Updated: 2018/12/27 17:10:11 by sregnard         ###   ########.fr       */
+/*   Updated: 2018/12/29 13:43:05 by sregnard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,30 @@ t_point	*proj_isometric(t_point *pt)
 }
 
 t_point *proj_parallel(t_point *pt)
+{
+	t_point *pt_new;
+
+	if (!(pt_new = ft_ptnew(0, 0, 0)))
+		return (NULL);
+	pt_new->x = 2 * (pt->x + pt->z);
+	pt_new->y = 2 * pt->y - pt->z;
+	pt_new->z = pt->z;
+	return (pt_new);
+}
+
+t_point *proj_cavaliere(t_point *pt)
+{
+	t_point *pt_new;
+
+	if (!(pt_new = ft_ptnew(0, 0, 0)))
+		return (NULL);
+	pt_new->x = 7 * pt->y + 20 * pt->x;
+	pt_new->y = 7 * pt->y - 20 * pt->z;
+	pt_new->z = pt->z;
+	return (pt_new);
+}
+
+t_point *proj_top(t_point *pt)
 {
 	t_point *pt_new;
 

@@ -6,7 +6,7 @@
 /*   By: sregnard <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/14 08:36:46 by sregnard          #+#    #+#             */
-/*   Updated: 2018/12/27 17:04:33 by sregnard         ###   ########.fr       */
+/*   Updated: 2018/12/29 14:08:35 by sregnard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ static void	draw_h_line(t_map *map, t_point p1, t_point p2, char c)
 		map->data[start.y][start.x++] = c;
 }
 
-static void	init_values(t_point *p1, t_point *p2, t_point *d, t_point *s, float *err)
+static void	init_values(t_point *p1, t_point *p2, t_point *d, t_point *s, int *err)
 {
 	d->x = (p1->x < p2->x) ? p2->x - p1->x : p1->x - p2->x;
 	s->x = (p1->x < p2->x) ? 1 : -1;
@@ -56,8 +56,8 @@ void		draw_line(t_map *map, t_point p1, t_point p2, char c)
 {
 	t_point	d;
 	t_point	s;
-	float	err;
-	float	err2;
+	int	err;
+	int	err2;
 
 	init_values(&p1, &p2, &d, &s, &err);
 	if (p1.x == p2.x)

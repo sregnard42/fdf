@@ -6,11 +6,12 @@
 /*   By: sregnard <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/17 08:11:11 by sregnard          #+#    #+#             */
-/*   Updated: 2018/12/27 13:52:15 by sregnard         ###   ########.fr       */
+/*   Updated: 2018/12/29 13:31:19 by sregnard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "xpm.h"
+#include "defines.h"
 
 static void	add_color(t_map *xpm, char c, char *color, int i)
 {
