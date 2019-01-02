@@ -6,7 +6,7 @@
 /*   By: sregnard <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/20 14:06:52 by sregnard          #+#    #+#             */
-/*   Updated: 2018/12/29 14:28:11 by sregnard         ###   ########.fr       */
+/*   Updated: 2019/01/02 15:17:39 by sregnard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,7 +83,7 @@ void		normalize(t_point ***pts, t_point *min, t_point *max)
  **	Scale image to window
  */
 
-void		scale_to_window(t_point ***pts, t_point *max)
+void		scale_to_window(t_params *p, t_point ***pts, t_point *max)
 {
 	t_point	pos;
 	t_point	*pt;
@@ -91,19 +91,19 @@ void		scale_to_window(t_point ***pts, t_point *max)
 	float	ratio_height;
 	float	ratio;
 
-	ratio_width = (float)(WIN_WIDTH - 1) / max->x;
-	ratio_height = (float)(WIN_HEIGHT - 1) / max->y;
+	ratio_width = (float)(WIN_WIDTH * p->scale_modifier - 1) / max->x;
+	ratio_height = (float)(WIN_HEIGHT * p->scale_modifier - 1) / max->y;
 	ratio = ratio_width < ratio_height ? ratio_width : ratio_height;
-	max->x = max->x * ratio;
-	max->y = max->y * ratio;
+	max->x = max->x * ratio + p->offset.x;
+	max->y = max->y * ratio + p->offset.y;
 	ft_ptset(&pos, 0, 0, 0);
 	while (pts && pts[pos.y])
 	{
 		while (pts[pos.y][pos.x])
 		{
 			pt = pts[pos.y][pos.x];
-			pt->x = pt->x * ratio;
-			pt->y = pt->y * ratio;
+			pt->x = pt->x * ratio + p->offset.x;
+			pt->y = pt->y * ratio + p->offset.y;
 			pos.x += 1;
 		}
 		ft_ptset(&pos, 0, pos.y + 1, 0);
@@ -155,6 +155,16 @@ void		draw_all_lines(t_params *p, t_point pos)
 	if (pos.y + 1 < p->input->height)
 	{
 		pt2 = p->pts[pos.y + 1][pos.x];
+		draw_line(p->output, *pt1, *pt2, find_color(p, pt1, pt2));
+	}
+	if (pos.x + 1 < p->input->width && pos.y + 1 < p->input->height)
+	{
+		pt2 = p->pts[pos.y + 1][pos.x + 1];
+		draw_line(p->output, *pt1, *pt2, find_color(p, pt1, pt2));
+	}
+	if (pos.x - 1 >= 0 && pos.y + 1 < p->input->height)
+	{
+		pt2 = p->pts[pos.y + 1][pos.x - 1];
 		draw_line(p->output, *pt1, *pt2, find_color(p, pt1, pt2));
 	}
 }

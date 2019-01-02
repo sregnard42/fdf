@@ -6,7 +6,7 @@
 /*   By: sregnard <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/14 13:37:06 by sregnard          #+#    #+#             */
-/*   Updated: 2018/12/29 13:37:23 by sregnard         ###   ########.fr       */
+/*   Updated: 2019/01/02 15:15:35 by sregnard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,9 @@ typedef struct		s_params
 	t_point		***pts;
 	t_point		min;
 	t_point		max;
+	t_point		offset;
 	float		height_modifier;
+	float		scale_modifier;
 }			t_params;
 
 void			params_init(t_params *params);

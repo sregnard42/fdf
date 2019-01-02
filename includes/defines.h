@@ -6,15 +6,21 @@
 /*   By: sregnard <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/29 13:23:18 by sregnard          #+#    #+#             */
-/*   Updated: 2018/12/29 13:55:19 by sregnard         ###   ########.fr       */
+/*   Updated: 2019/01/02 13:41:34 by sregnard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef DEFINES_H
 # define DEFINES_H
 
-# define KEY_ESCAPE		53
+# define KEY_A			0
+# define KEY_S			1
+# define KEY_D			2
+# define KEY_Q			12
+# define KEY_W			13
+# define KEY_E			14
 # define KEY_DOT		47
+# define KEY_ESCAPE		53
 # define KEY_LEFT		123
 # define KEY_RIGHT		124
 # define KEY_DOWN		125

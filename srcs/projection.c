@@ -6,7 +6,7 @@
 /*   By: sregnard <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/20 13:36:45 by sregnard          #+#    #+#             */
-/*   Updated: 2018/12/29 15:42:03 by sregnard         ###   ########.fr       */
+/*   Updated: 2019/01/02 13:52:43 by sregnard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,12 +91,13 @@ static void		place_points(t_params *p)
 		while (p->pts[pos.y][pos.x])
 		{
 			pt = p->pts[pos.y][pos.x];
-			if (pt->y < 0 || pt->x < 0
+			if (!(pt->y < 0 || pt->x < 0
 					|| pt->y >= p->output->height
-					|| pt->x >= p->output->width)
-				trigger_error("Out of array, place_points", p);
-			(p->output->data)[pt->y][pt->x] = '*';
-			draw_all_lines(p, pos);
+					|| pt->x >= p->output->width))
+			{
+				(p->output->data)[pt->y][pt->x] = '*';
+				draw_all_lines(p, pos);
+			}
 			ft_memdel((void **)&pt);
 			pos.x += 1;
 		}
@@ -111,7 +112,7 @@ void			projection_3d(t_params *p)
 	get_points(p);
 	find_min_max(p->pts, &(p->min), &(p->max));
 	normalize(p->pts, &(p->min), &(p->max));
-	scale_to_window(p->pts, &(p->max));
+	scale_to_window(p, p->pts, &(p->max));
 	if (!(p->output = ft_mapnew(p->max.x + 1, p->max.y + 1, '.')))
 		trigger_error("Error malloc projection_3d", p);
 	place_points(p);

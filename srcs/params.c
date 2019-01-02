@@ -6,7 +6,7 @@
 /*   By: sregnard <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/18 09:25:13 by sregnard          #+#    #+#             */
-/*   Updated: 2018/12/29 16:26:11 by sregnard         ###   ########.fr       */
+/*   Updated: 2019/01/02 15:15:43 by sregnard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,9 @@ void	params_init(t_params *params)
 	params->xpm = NULL;
 	params->pts = NULL;
 	params->height_modifier = 1;
+	params->scale_modifier = 1;
+	params->offset.x = 0;
+	params->offset.y = 0;
 }
 
 void	params_free_view(t_params *p)

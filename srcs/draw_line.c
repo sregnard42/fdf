@@ -6,7 +6,7 @@
 /*   By: sregnard <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/14 08:36:46 by sregnard          #+#    #+#             */
-/*   Updated: 2018/12/29 14:08:35 by sregnard         ###   ########.fr       */
+/*   Updated: 2019/01/02 14:06:36 by sregnard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,11 @@ static void	draw_v_line(t_map *map, t_point p1, t_point p2, char c)
 	start = p1.y < p2.y ? p1 : p2;
 	end = p1.y > p2.y ? p1 : p2;
 	while (start.y < end.y)
-		map->data[start.y++][start.x] = c;
+	{
+		if (start.y >= 0 && start.x >= 0)
+			map->data[start.y][start.x] = c;
+		start.y += 1;
+	}
 }
 
 static void	draw_h_line(t_map *map, t_point p1, t_point p2, char c)
@@ -31,7 +35,11 @@ static void	draw_h_line(t_map *map, t_point p1, t_point p2, char c)
 	start = p1.x < p2.x ? p1 : p2;
 	end = p1.x > p2.x ? p1 : p2;
 	while (start.x < end.x)
-		map->data[start.y][start.x++] = c;
+	{
+		if (start.y >= 0 && start.x >= 0)
+			map->data[start.y][start.x] = c;
+		start.x += 1;
+	}
 }
 
 static void	init_values(t_point *p1, t_point *p2, t_point *d, t_point *s, int *err)
@@ -49,7 +57,8 @@ static int	end_reached(t_point s, t_point p1, t_point p2)
 			|| (s.x == 1 && p1.x > p2.x)
 			|| (s.y == 1 && p1.y > p2.y)
 			|| (s.x == -1 && p2.x > p1.x)
-			|| (s.y == -1 && p2.y > p1.y));
+			|| (s.y == -1 && p2.y > p1.y)
+			|| (p1.x < 0 || p1.y < 0));
 }
 
 void		draw_line(t_map *map, t_point p1, t_point p2, char c)
