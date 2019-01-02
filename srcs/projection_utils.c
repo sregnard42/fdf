@@ -6,7 +6,7 @@
 /*   By: sregnard <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/20 14:06:52 by sregnard          #+#    #+#             */
-/*   Updated: 2019/01/02 15:17:39 by sregnard         ###   ########.fr       */
+/*   Updated: 2019/01/02 16:13:51 by sregnard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,16 +94,16 @@ void		scale_to_window(t_params *p, t_point ***pts, t_point *max)
 	ratio_width = (float)(WIN_WIDTH * p->scale_modifier - 1) / max->x;
 	ratio_height = (float)(WIN_HEIGHT * p->scale_modifier - 1) / max->y;
 	ratio = ratio_width < ratio_height ? ratio_width : ratio_height;
-	max->x = max->x * ratio + p->offset.x;
-	max->y = max->y * ratio + p->offset.y;
+	max->x = max->x * ratio + p->offset.x + (WIN_WIDTH * (1 - p->scale_modifier)) / 2;
+	max->y = max->y * ratio + p->offset.y + (WIN_HEIGHT * (1 - p->scale_modifier)) / 2;
 	ft_ptset(&pos, 0, 0, 0);
 	while (pts && pts[pos.y])
 	{
 		while (pts[pos.y][pos.x])
 		{
 			pt = pts[pos.y][pos.x];
-			pt->x = pt->x * ratio + p->offset.x;
-			pt->y = pt->y * ratio + p->offset.y;
+			pt->x = pt->x * ratio + p->offset.x + (WIN_WIDTH * (1 - p->scale_modifier)) / 2;
+			pt->y = pt->y * ratio + p->offset.y + (WIN_HEIGHT * (1 - p->scale_modifier)) / 2;
 			pos.x += 1;
 		}
 		ft_ptset(&pos, 0, pos.y + 1, 0);
