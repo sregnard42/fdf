@@ -6,12 +6,16 @@
 /*   By: sregnard <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/13 11:05:50 by sregnard          #+#    #+#             */
-/*   Updated: 2019/01/02 15:17:19 by sregnard         ###   ########.fr       */
+/*   Updated: 2019/01/06 15:46:36 by sregnard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "fdf.h"
+#include "mlx.h"
 #include "defines.h"
+#include "params.h"
+#include "projection.h"
+#include "xpm.h"
+#include "errors.h"
 
 static void	update_view(t_params *p)
 {

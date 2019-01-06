@@ -6,12 +6,11 @@
 /*   By: sregnard <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/19 13:47:15 by sregnard          #+#    #+#             */
-/*   Updated: 2018/12/29 13:43:05 by sregnard         ###   ########.fr       */
+/*   Updated: 2019/01/06 15:52:56 by sregnard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "projection.h"
-#include <math.h>
+#include "libft.h"
 
 t_point	*proj_isometric(t_point *pt)
 {

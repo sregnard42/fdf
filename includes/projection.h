@@ -6,15 +6,12 @@
 /*   By: sregnard <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/19 13:51:33 by sregnard          #+#    #+#             */
-/*   Updated: 2019/01/02 13:43:57 by sregnard         ###   ########.fr       */
+/*   Updated: 2019/01/06 15:52:08 by sregnard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef PROJECTION_H
 # define PROJECTION_H
-
-# include "libft.h"
-# include "params.h"
 
 typedef struct	s_projection
 {
@@ -40,7 +37,7 @@ t_point	*proj_top(t_point *pt);
 */
 
 void	find_min_max(t_point ***pts, t_point *min, t_point *max);
-int	normalize(t_point ***pts, t_point *min, t_point *max);
+void	normalize(t_point ***pts, t_point *min, t_point *max);
 void	scale_to_window(t_params *p, t_point ***pts, t_point *max);
 void	draw_all_lines(t_params *p, t_point pos);
 

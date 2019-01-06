@@ -6,11 +6,11 @@
 /*   By: sregnard <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/14 08:36:46 by sregnard          #+#    #+#             */
-/*   Updated: 2019/01/02 14:06:36 by sregnard         ###   ########.fr       */
+/*   Updated: 2019/01/06 15:53:10 by sregnard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "draw.h"
+#include "libft.h"
 
 static void	draw_v_line(t_map *map, t_point p1, t_point p2, char c)
 {

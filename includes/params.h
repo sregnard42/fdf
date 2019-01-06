@@ -6,7 +6,7 @@
 /*   By: sregnard <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/14 13:37:06 by sregnard          #+#    #+#             */
-/*   Updated: 2019/01/02 15:15:35 by sregnard         ###   ########.fr       */
+/*   Updated: 2019/01/06 15:45:22 by sregnard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,6 @@
 # define PARAMS_H
 
 # include "libft.h"
-# include "mlx.h"
 
 typedef struct		s_params
 {

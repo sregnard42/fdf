@@ -6,10 +6,13 @@
 /*   By: sregnard <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/24 09:15:29 by sregnard          #+#    #+#             */
-/*   Updated: 2018/12/29 16:27:45 by sregnard         ###   ########.fr       */
+/*   Updated: 2019/01/06 15:48:41 by sregnard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "libft.h"
+#include "defines.h"
+#include "params.h"
 #include "errors.h"
 
 /*

@@ -6,12 +6,14 @@
 /*   By: sregnard <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/18 09:25:13 by sregnard          #+#    #+#             */
-/*   Updated: 2019/01/02 15:15:43 by sregnard         ###   ########.fr       */
+/*   Updated: 2019/01/06 15:49:33 by sregnard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "params.h"
+#include "mlx.h"
+#include "libft.h"
 #include "defines.h"
+#include "params.h"
 
 void	params_init(t_params *params)
 {

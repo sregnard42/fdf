@@ -6,14 +6,15 @@
 /*   By: sregnard <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/20 14:06:52 by sregnard          #+#    #+#             */
-/*   Updated: 2019/01/02 16:13:51 by sregnard         ###   ########.fr       */
+/*   Updated: 2019/01/06 15:52:37 by sregnard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
-#include "draw.h"
-#include "xpm.h"
 #include "defines.h"
+#include "params.h"
+#include "projection.h"
+#include "draw.h"
 
 /*
  ** Find both minimum x and y and both maximum x and y

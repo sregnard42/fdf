@@ -6,15 +6,15 @@
 /*   By: sregnard <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/20 13:36:45 by sregnard          #+#    #+#             */
-/*   Updated: 2019/01/02 13:52:43 by sregnard         ###   ########.fr       */
+/*   Updated: 2019/01/06 15:50:53 by sregnard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
-#include "projection.h"
-#include "draw.h"
-#include "errors.h"
 #include "defines.h"
+#include "params.h"
+#include "errors.h"
+#include "projection.h"
 
 static t_point	*get_point(t_params *p, t_point *pos)
 {

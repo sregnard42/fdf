@@ -6,15 +6,12 @@
 /*   By: sregnard <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/24 09:14:37 by sregnard          #+#    #+#             */
-/*   Updated: 2018/12/27 11:17:25 by sregnard         ###   ########.fr       */
+/*   Updated: 2019/01/06 15:41:13 by sregnard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef ERRORS_H
 # define ERRORS_H
-
-# include "libft.h"
-# include "params.h"
 
 # define DEBUG				1
 # define DEBUG_ON			"DEBUG : "
