@@ -6,7 +6,7 @@
 /*   By: sregnard <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/20 13:36:45 by sregnard          #+#    #+#             */
-/*   Updated: 2019/01/06 15:50:53 by sregnard         ###   ########.fr       */
+/*   Updated: 2019/01/07 09:14:41 by sregnard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,34 +29,30 @@ static t_point	*get_point(t_params *p, t_point *pos)
 	return (NULL);
 }
 
-static int		process_line(t_params *p, char **line, t_point pos)
+static void		process_line(t_params *p, char **line, t_point pos)
 {
 	t_point	*pt;
 
 	while (line[pos.x])
 	{
-		pos.z = ft_atoi(line[pos.x]) * p->height_modifier;
+		pos.z = ft_atoi(line[pos.x]) * p->height;
 		if (!(pt = get_point(p, &pos)))
-			return (0);
+			trigger_error("Error malloc (t_point *) in process_line", p);
 		p->pts[pos.y][pos.x] = pt;
 		pos.x += 1;
 	}
+	ft_free_tab(&line);
 	p->pts[pos.y][pos.x] = NULL;
-	return (1);
 }
 
-/*
- **	Create a list of points representing the projection
- */
-
-static void	get_points(t_params *p)
+static void		get_points(t_params *p)
 {
 	t_point pos;
 	char	**line;
 
 	if (!(p->pts = (t_point ***)malloc(sizeof(t_point **)
 					* (p->input->height + 1))))
-		trigger_error("Error malloc pts get_points", p);
+		trigger_error("Error malloc (t_point ***) in get_points", p);
 	p->pts[p->input->height] = NULL;
 	ft_ptset(&pos, 0, 0, 0);
 	while (pos.y < p->input->height)
@@ -68,14 +64,12 @@ static void	get_points(t_params *p)
 		else if (p->input->width != ft_nb_str_tab(line))
 		{
 			ft_free_tab(&line);
-			trigger_error("Line length changed.", p);
+			trigger_error("Different line length.", p);
 		}
 		if (!(p->pts[pos.y] = (t_point **)malloc(sizeof(t_point *)
 						* (p->input->width + 1))))
-			trigger_error("Error malloc pts[y] get_points", p);
-		p->pts[pos.y][p->input->width] = NULL;
+			trigger_error("Error malloc (t_point **) in get_points", p);
 		process_line(p, line, pos);
-		ft_free_tab(&line);
 		pos.y += 1;
 	}
 }
@@ -101,7 +95,7 @@ static void		place_points(t_params *p)
 			ft_memdel((void **)&pt);
 			pos.x += 1;
 		}
-		free (p->pts[pos.y]);
+		free(p->pts[pos.y]);
 		p->pts[pos.y] = NULL;
 		ft_ptset(&pos, 0, pos.y + 1, 0);
 	}

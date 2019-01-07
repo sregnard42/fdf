@@ -6,7 +6,7 @@
 /*   By: sregnard <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/20 14:06:52 by sregnard          #+#    #+#             */
-/*   Updated: 2019/01/06 15:52:37 by sregnard         ###   ########.fr       */
+/*   Updated: 2019/01/07 11:54:19 by sregnard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,50 +16,35 @@
 #include "projection.h"
 #include "draw.h"
 
-/*
- ** Find both minimum x and y and both maximum x and y
- */
-
 void	find_min_max(t_point ***pts, t_point *min, t_point *max)
 {
-	t_point *pt;
 	t_point	pos;
 
-	ft_ptset(&pos, 0, 0, 0);
+	ft_ptset(&pos, -1, 0, 0);
+	ft_ptcpy(min, pts[pos.y][pos.x + 1]);
+	ft_ptcpy(max, pts[pos.y][pos.x + 1]);
 	while (pts && pts[pos.y])
 	{
-		while (pts[pos.y][pos.x])
+		while (pts[pos.y][++pos.x])
 		{
-			pt = pts[pos.y][pos.x];
-			if (pos.y == 0 && pos.x == 0)
-			{
-				ft_ptset(min, pt->x, pt->y, pt->z);
-				ft_ptset(max, pt->x, pt->y, pt->z);
-			}
-			if (min->x > pt->x)
-				min->x = pt->x;
-			if (min->y > pt->y)
-				min->y = pt->y;
-			if (min->z > pt->z)
-				min->z = pt->z;
-			if (max->x < pt->x)
-				max->x = pt->x;
-			if (max->y < pt->y)
-				max->y = pt->y;
-			if (max->z < pt->z)
-				max->z = pt->z;
-			pos.x += 1;
+			if (min->x > pts[pos.y][pos.x]->x)
+				min->x = pts[pos.y][pos.x]->x;
+			if (min->y > pts[pos.y][pos.x]->y)
+				min->y = pts[pos.y][pos.x]->y;
+			if (min->z > pts[pos.y][pos.x]->z)
+				min->z = pts[pos.y][pos.x]->z;
+			if (max->x < pts[pos.y][pos.x]->x)
+				max->x = pts[pos.y][pos.x]->x;
+			if (max->y < pts[pos.y][pos.x]->y)
+				max->y = pts[pos.y][pos.x]->y;
+			if (max->z < pts[pos.y][pos.x]->z)
+				max->z = pts[pos.y][pos.x]->z;
 		}
-		ft_ptset(&pos, 0, pos.y + 1, 0);
+		ft_ptset(&pos, -1, pos.y + 1, 0);
 	}
 }
 
-/*
- ** Normalize points so that there is no negative coordinates
- ** Max will store both the maximum x and y AFTER normalization
- */
-
-void		normalize(t_point ***pts, t_point *min, t_point *max)
+void	normalize(t_point ***pts, t_point *min, t_point *max)
 {
 	t_point *pt;
 	t_point	pos;
@@ -80,11 +65,7 @@ void		normalize(t_point ***pts, t_point *min, t_point *max)
 	max->y = max->y - min->y;
 }
 
-/*
- **	Scale image to window
- */
-
-void		scale_to_window(t_params *p, t_point ***pts, t_point *max)
+void	scale_to_window(t_params *p, t_point ***pts, t_point *max)
 {
 	t_point	pos;
 	t_point	*pt;
@@ -92,37 +73,32 @@ void		scale_to_window(t_params *p, t_point ***pts, t_point *max)
 	float	ratio_height;
 	float	ratio;
 
-	ratio_width = (float)(WIN_WIDTH * p->scale_modifier - 1) / max->x;
-	ratio_height = (float)(WIN_HEIGHT * p->scale_modifier - 1) / max->y;
+	ratio_width = (float)(WIN_WIDTH * p->zoom - 1) / max->x;
+	ratio_height = (float)(WIN_HEIGHT * p->zoom - 1) / max->y;
 	ratio = ratio_width < ratio_height ? ratio_width : ratio_height;
-	max->x = max->x * ratio + p->offset.x + (WIN_WIDTH * (1 - p->scale_modifier)) / 2;
-	max->y = max->y * ratio + p->offset.y + (WIN_HEIGHT * (1 - p->scale_modifier)) / 2;
+	max->x = max->x * ratio + p->offset.x + (WIN_WIDTH * (1 - p->zoom)) / 2;
+	max->y = max->y * ratio + p->offset.y + (WIN_HEIGHT * (1 - p->zoom)) / 2;
 	ft_ptset(&pos, 0, 0, 0);
 	while (pts && pts[pos.y])
 	{
 		while (pts[pos.y][pos.x])
 		{
-			pt = pts[pos.y][pos.x];
-			pt->x = pt->x * ratio + p->offset.x + (WIN_WIDTH * (1 - p->scale_modifier)) / 2;
-			pt->y = pt->y * ratio + p->offset.y + (WIN_HEIGHT * (1 - p->scale_modifier)) / 2;
-			pos.x += 1;
+			pt = pts[pos.y][pos.x++];
+			pt->x = pt->x * ratio + p->offset.x
+				+ (WIN_WIDTH * (1 - p->zoom)) / 2;
+			pt->y = pt->y * ratio + p->offset.y
+				+ (WIN_HEIGHT * (1 - p->zoom)) / 2;
 		}
 		ft_ptset(&pos, 0, pos.y + 1, 0);
 	}
 }
 
-/*
- **	The higher the height compared to max height the hotter the color
- */
-
-char        find_color(t_params *p, t_point *pt1, t_point *pt2)
+char	find_color(t_params *p, t_point *pt1, t_point *pt2)
 {
 	float	val;
 
 	val = (pt1->z + pt2->z) / 2;
-	val = (val / (p->max.z - p->min.z)) * 100;
-	if (val < 0)
-		val *= -1;
+	val = (val - p->min.z) / (p->max.z - p->min.z) * 100;
 	if (val <= 0)
 		return (COLOR_BLUE);
 	if (val <= 20)
@@ -138,11 +114,7 @@ char        find_color(t_params *p, t_point *pt1, t_point *pt2)
 	return (COLOR_WHITE);
 }
 
-/*
- **	Link points by drawing lines between then
- */
-
-void		draw_all_lines(t_params *p, t_point pos)
+void	draw_all_lines(t_params *p, t_point pos)
 {
 	t_point *pt1;
 	t_point *pt2;

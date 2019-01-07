@@ -6,7 +6,7 @@
 /*   By: sregnard <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/14 13:37:06 by sregnard          #+#    #+#             */
-/*   Updated: 2019/01/06 15:45:22 by sregnard         ###   ########.fr       */
+/*   Updated: 2019/01/07 09:25:10 by sregnard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,12 +15,12 @@
 
 # include "libft.h"
 
-typedef struct		s_params
+typedef struct	s_params
 {
 	void		*mlx;
 	void		*win;
 	void		*img;
-	int		view;
+	int			view;
 	t_map		*input;
 	t_map		*output;
 	t_map		*xpm;
@@ -28,9 +28,9 @@ typedef struct		s_params
 	t_point		min;
 	t_point		max;
 	t_point		offset;
-	float		height_modifier;
-	float		scale_modifier;
-}			t_params;
+	float		height;
+	float		zoom;
+}				t_params;
 
 void			params_init(t_params *params);
 void			params_free_view(t_params *params);

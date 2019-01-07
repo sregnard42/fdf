@@ -6,16 +6,12 @@
 /*   By: sregnard <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/19 13:51:33 by sregnard          #+#    #+#             */
-/*   Updated: 2019/01/06 15:52:08 by sregnard         ###   ########.fr       */
+/*   Updated: 2019/01/07 09:25:26 by sregnard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef PROJECTION_H
 # define PROJECTION_H
-
-typedef struct	s_projection
-{
-}		t_projection;
 
 /*
 **	projection.c

@@ -6,7 +6,7 @@
 /*   By: sregnard <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/18 09:25:13 by sregnard          #+#    #+#             */
-/*   Updated: 2019/01/06 15:49:33 by sregnard         ###   ########.fr       */
+/*   Updated: 2019/01/07 11:52:06 by sregnard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,8 +26,8 @@ void	params_init(t_params *params)
 	params->output = NULL;
 	params->xpm = NULL;
 	params->pts = NULL;
-	params->height_modifier = 1;
-	params->scale_modifier = 1;
+	params->height = 1;
+	params->zoom = 1;
 	params->offset.x = 0;
 	params->offset.y = 0;
 }
@@ -60,8 +60,6 @@ void	params_free(t_params *p)
 	params_free_view(p);
 	if (p->win)
 		mlx_destroy_window(p->mlx, p->win);
-	if (p->mlx)
-		free(p->mlx);
 	if (p->input)
 		ft_mapfree(&p->input);
 }

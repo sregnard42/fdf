@@ -6,7 +6,7 @@
 /*   By: sregnard <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/19 13:47:15 by sregnard          #+#    #+#             */
-/*   Updated: 2019/01/06 15:52:56 by sregnard         ###   ########.fr       */
+/*   Updated: 2019/01/07 08:22:34 by sregnard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ t_point	*proj_isometric(t_point *pt)
 	return (pt_new);
 }
 
-t_point *proj_parallel(t_point *pt)
+t_point	*proj_parallel(t_point *pt)
 {
 	t_point *pt_new;
 
@@ -36,7 +36,7 @@ t_point *proj_parallel(t_point *pt)
 	return (pt_new);
 }
 
-t_point *proj_cavaliere(t_point *pt)
+t_point	*proj_cavaliere(t_point *pt)
 {
 	t_point *pt_new;
 
@@ -48,7 +48,7 @@ t_point *proj_cavaliere(t_point *pt)
 	return (pt_new);
 }
 
-t_point *proj_top(t_point *pt)
+t_point	*proj_top(t_point *pt)
 {
 	t_point *pt_new;
 
