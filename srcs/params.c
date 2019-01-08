@@ -6,7 +6,7 @@
 /*   By: sregnard <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/18 09:25:13 by sregnard          #+#    #+#             */
-/*   Updated: 2019/01/07 11:52:06 by sregnard         ###   ########.fr       */
+/*   Updated: 2019/01/08 09:00:05 by sregnard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,10 +14,12 @@
 #include "libft.h"
 #include "defines.h"
 #include "params.h"
+#include "errors.h"
 
 void	params_init(t_params *params)
 {
-	params->mlx = mlx_init();
+	if (!(params->mlx = mlx_init()))
+		trigger_error("mlx_init returned NULL.", params);
 	params->win = mlx_new_window(params->mlx, WIN_WIDTH, WIN_HEIGHT,
 			"FdF");
 	params->img = NULL;
@@ -52,7 +54,8 @@ void	params_free_view(t_params *p)
 		free(p->pts[pos.y]);
 		ft_ptset(&pos, 0, pos.y + 1, 0);
 	}
-	free(p->pts);
+	if (p->pts)
+		free(p->pts);
 }
 
 void	params_free(t_params *p)

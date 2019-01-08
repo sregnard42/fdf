@@ -6,7 +6,7 @@
 /*   By: sregnard <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/20 14:06:52 by sregnard          #+#    #+#             */
-/*   Updated: 2019/01/07 11:54:19 by sregnard         ###   ########.fr       */
+/*   Updated: 2019/01/08 08:43:15 by sregnard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,13 +93,13 @@ void	scale_to_window(t_params *p, t_point ***pts, t_point *max)
 	}
 }
 
-char	find_color(t_params *p, t_point *pt1, t_point *pt2)
+char	find_color(t_params *p, t_point *p1, t_point *p2)
 {
-	float	val;
+	float val;
 
-	val = (pt1->z + pt2->z) / 2;
+	val = (p1->z + p2->z) / 2;
 	val = (val - p->min.z) / (p->max.z - p->min.z) * 100;
-	if (val <= 0)
+	if (val <= 1)
 		return (COLOR_BLUE);
 	if (val <= 20)
 		return (COLOR_CYAN);
@@ -130,7 +130,7 @@ void	draw_all_lines(t_params *p, t_point pos)
 		pt2 = p->pts[pos.y + 1][pos.x];
 		draw_line(p->output, *pt1, *pt2, find_color(p, pt1, pt2));
 	}
-	if (pos.x + 1 < p->input->width && pos.y + 1 < p->input->height)
+	/*if (pos.x + 1 < p->input->width && pos.y + 1 < p->input->height)
 	{
 		pt2 = p->pts[pos.y + 1][pos.x + 1];
 		draw_line(p->output, *pt1, *pt2, find_color(p, pt1, pt2));
@@ -140,4 +140,5 @@ void	draw_all_lines(t_params *p, t_point pos)
 		pt2 = p->pts[pos.y + 1][pos.x - 1];
 		draw_line(p->output, *pt1, *pt2, find_color(p, pt1, pt2));
 	}
+	*/
 }

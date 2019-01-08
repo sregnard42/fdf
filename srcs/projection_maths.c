@@ -6,7 +6,7 @@
 /*   By: sregnard <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/19 13:47:15 by sregnard          #+#    #+#             */
-/*   Updated: 2019/01/07 08:22:34 by sregnard         ###   ########.fr       */
+/*   Updated: 2019/01/08 08:37:33 by sregnard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ t_point	*proj_isometric(t_point *pt)
 	if (!(pt_new = ft_ptnew(0, 0, 0)))
 		return (NULL);
 	pt_new->x = (pt->x - pt->y) * 2;
-	pt_new->y = (pt->x + pt->y) - 2 * pt->z;
+	pt_new->y = (pt->x + pt->y) - pt->z * 2;
 	pt_new->z = pt->z;
 	return (pt_new);
 }
