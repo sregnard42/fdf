@@ -6,7 +6,7 @@
 #    By: sregnard <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/11/07 14:51:18 by sregnard          #+#    #+#              #
-#    Updated: 2019/01/02 13:48:17 by sregnard         ###   ########.fr        #
+#    Updated: 2019/01/10 14:37:23 by sregnard         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -25,6 +25,7 @@ HEADERS			+=	-I $(MINILIBXDIR)
 
 SRCDIR			=	srcs/
 SRCNAME			= 	main.c \
+					controller.c \
 					errors.c \
 					params.c \
 					xpm.c \
