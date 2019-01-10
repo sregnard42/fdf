@@ -6,11 +6,12 @@
 /*   By: sregnard <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/13 11:27:59 by sregnard          #+#    #+#             */
-/*   Updated: 2018/12/19 14:19:39 by sregnard         ###   ########.fr       */
+/*   Updated: 2019/01/10 15:03:36 by sregnard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "read_file.h"
+#include "libft.h"
 
 static char		*get_content(int fd, char *content)
 {
@@ -46,7 +47,7 @@ char			**read_file(char *file)
 	char	*content;
 	int		fd;
 
-	if ((fd = open(file, O_RDONLY)) == -1)
+	if (ft_strequ(file, "/dev/random") || (fd = open(file, O_RDONLY)) == -1)
 		return (NULL);
 	if (!(content = get_content(fd, file)))
 		return (NULL);
