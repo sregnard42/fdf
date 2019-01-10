@@ -6,7 +6,7 @@
 /*   By: sregnard <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/29 13:23:18 by sregnard          #+#    #+#             */
-/*   Updated: 2019/01/07 09:24:41 by sregnard         ###   ########.fr       */
+/*   Updated: 2019/01/10 11:06:20 by sregnard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,7 @@
 
 # define WIN_WIDTH				1280
 # define WIN_HEIGHT				720
+# define OFFSET_STEP			10
 
 # define VIEW_ISOMETRIC			0
 # define VIEW_PARALLEL			1

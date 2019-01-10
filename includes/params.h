@@ -6,7 +6,7 @@
 /*   By: sregnard <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/14 13:37:06 by sregnard          #+#    #+#             */
-/*   Updated: 2019/01/07 09:25:10 by sregnard         ###   ########.fr       */
+/*   Updated: 2019/01/10 10:53:12 by sregnard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,8 @@ typedef struct	s_params
 }				t_params;
 
 void			params_init(t_params *params);
+void			params_update_view(t_params *params);
+void			params_reset_view(t_params *params);
 void			params_free_view(t_params *params);
 void			params_free(t_params *params);
 

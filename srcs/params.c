@@ -6,7 +6,7 @@
 /*   By: sregnard <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/18 09:25:13 by sregnard          #+#    #+#             */
-/*   Updated: 2019/01/08 09:00:05 by sregnard         ###   ########.fr       */
+/*   Updated: 2019/01/10 11:37:23 by sregnard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,8 @@
 #include "defines.h"
 #include "params.h"
 #include "errors.h"
+#include "projection.h"
+#include "xpm.h"
 
 void	params_init(t_params *params)
 {
@@ -34,6 +36,25 @@ void	params_init(t_params *params)
 	params->offset.y = 0;
 }
 
+void	params_update_view(t_params *p)
+{
+	params_free_view(p);
+	projection_3d(p);
+	xpm_conversion(p);
+	if (!(p->img = mlx_xpm_to_image(p->mlx, p->xpm->data,
+					&(p->xpm->width), &(p->xpm->height))))
+		trigger_error("Error while loading XPM into an image.", p);
+	mlx_put_image_to_window(p->mlx, p->win, p->img, 0, 0);
+}
+
+void	params_reset_view(t_params *params)
+{
+	params->height = 1;
+	params->zoom = 1;
+	params->offset.x = 0;
+	params->offset.y = 0;
+}
+
 void	params_free_view(t_params *p)
 {
 	t_point	pos;
@@ -42,6 +63,7 @@ void	params_free_view(t_params *p)
 		mlx_clear_window(p->mlx, p->win);
 	if (p->img)
 		mlx_destroy_image(p->mlx, p->img);
+	p->img = NULL;
 	if (p->output)
 		ft_mapfree(&p->output);
 	if (p->xpm)
@@ -56,6 +78,7 @@ void	params_free_view(t_params *p)
 	}
 	if (p->pts)
 		free(p->pts);
+	p->pts = NULL;
 }
 
 void	params_free(t_params *p)
