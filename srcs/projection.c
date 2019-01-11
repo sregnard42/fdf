@@ -6,7 +6,7 @@
 /*   By: sregnard <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/20 13:36:45 by sregnard          #+#    #+#             */
-/*   Updated: 2019/01/11 12:54:15 by sregnard         ###   ########.fr       */
+/*   Updated: 2019/01/11 13:26:16 by sregnard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,12 +32,15 @@ static t_point	*get_point(t_params *p, t_point *pos)
 static void		process_line(t_params *p, char **line, t_point pos)
 {
 	t_point	*pt;
+	int	height;
 
 	while (line[pos.x])
 	{
-		pos.z = ft_atoi(line[pos.x]) * p->height;
+		height = ft_atoi(line[pos.x]);
+		pos.z = height * p->height;
 		if (!(pt = get_point(p, &pos)))
 			trigger_error("Error malloc (t_point *) in process_line", p);
+		pt->z = height;
 		p->pts[pos.y][pos.x] = pt;
 		pos.x += 1;
 	}
