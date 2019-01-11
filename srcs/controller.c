@@ -6,7 +6,7 @@
 /*   By: sregnard <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/10 14:34:50 by sregnard          #+#    #+#             */
-/*   Updated: 2019/01/10 14:39:24 by sregnard         ###   ########.fr       */
+/*   Updated: 2019/01/11 13:28:36 by sregnard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,9 +32,9 @@ static void	view_and_height(int keycode, t_params *params)
 			params->view += 1;
 	}
 	if (keycode == KEY_DOWN)
-		params->height -= 0.1;
+		params->height -= 0.05;
 	if (keycode == KEY_UP)
-		params->height += 0.1;
+		params->height += 0.05;
 }
 
 static void	zoom_and_move(int keycode, t_params *p)
