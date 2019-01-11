@@ -6,7 +6,7 @@
 /*   By: sregnard <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/20 13:36:45 by sregnard          #+#    #+#             */
-/*   Updated: 2019/01/10 14:57:43 by sregnard         ###   ########.fr       */
+/*   Updated: 2019/01/11 12:54:15 by sregnard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,6 +101,8 @@ void			projection_3d(t_params *p)
 	find_min_max(p);
 	normalize(p);
 	scale_to_window(p);
+	if (p->max.x < 0 || p->max.y < 0)
+		trigger_error("Error p->max", p);
 	if (!(p->output = ft_mapnew(p->max.x + 1, p->max.y + 1, '.')))
 		trigger_error("Error malloc projection_3d", p);
 	place_points(p);
