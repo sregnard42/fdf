@@ -6,7 +6,7 @@
 /*   By: sregnard <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/20 14:06:52 by sregnard          #+#    #+#             */
-/*   Updated: 2019/01/10 14:59:29 by sregnard         ###   ########.fr       */
+/*   Updated: 2019/01/11 12:54:53 by sregnard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,8 +75,8 @@ void	scale_to_window(t_params *p)
 	float	ratio_height;
 	float	r;
 
-	ratio_width = (float)(WIN_WIDTH * p->zoom - 1) / p->max.x;
-	ratio_height = (float)(WIN_HEIGHT * p->zoom - 1) / p->max.y;
+	ratio_width = p->max.x > 0 ? (WIN_WIDTH * p->zoom - 1) / p->max.x : 0;
+	ratio_height = p->max.y > 0 ? (WIN_HEIGHT * p->zoom - 1) / p->max.y : 0;
 	r = ratio_width < ratio_height ? ratio_width : ratio_height;
 	p->min.x = p->min.x * r + p->offset.x + (WIN_WIDTH * (1 - p->zoom)) / 2;
 	p->min.y = p->min.y * r + p->offset.y + (WIN_HEIGHT * (1 - p->zoom)) / 2;
