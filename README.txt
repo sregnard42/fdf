@@ -6,7 +6,7 @@
 #    By: sregnard <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/01/11 14:11:28 by sregnard          #+#    #+#              #
-#    Updated: 2019/01/11 14:17:17 by sregnard         ###   ########.fr        #
+#    Updated: 2019/01/12 12:33:25 by sregnard         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -25,3 +25,5 @@ Down Arrow : Decrease height
 
 Left Arrow : Go to previous view
 Right Arrow : Go to next view
+
+. : Reset height/zoom to default values
