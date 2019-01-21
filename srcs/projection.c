@@ -6,7 +6,7 @@
 /*   By: sregnard <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/20 13:36:45 by sregnard          #+#    #+#             */
-/*   Updated: 2019/01/11 13:26:16 by sregnard         ###   ########.fr       */
+/*   Updated: 2019/01/21 12:27:40 by sregnard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ static t_point	*get_point(t_params *p, t_point *pos)
 static void		process_line(t_params *p, char **line, t_point pos)
 {
 	t_point	*pt;
-	int	height;
+	int		height;
 
 	while (line[pos.x])
 	{
